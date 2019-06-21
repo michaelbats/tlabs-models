@@ -3,11 +3,18 @@
   "version": "0.0.2",
   "description": "Typescript Interfaces and models for TL apps",
   "main": "index.js",
-  "repository": "https://github.com/michaelbats/TLModels.git",
+  "repository": "https://github.com/michaelbats/tlabs-models.git",
   "author": "Sebastian Gug",
   "license": "All rights reserved",
   "private": false,
   "dependencies": {
     "ts-mongoose": "^0.0.16"
+  },
+  "peerDependencies": {
+    "mongoose": "5.4.19"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.5.6",
+    "mongoose": "5.4.19"
   }
 }
