@@ -1,6 +1,7 @@
 import { createSchema, Type, typedModel } from 'ts-mongoose';
 import { ExtractInterface } from '../utils/type-extractors';
 
+// Used to get types + schema
 const ExternalUserSchema = createSchema({
   _id: Type.string({ required: true }),
   signedIn: Type.boolean({ required: true, default: false }),
@@ -21,5 +22,26 @@ const ExternalUserSchema = createSchema({
   })
 });
 
+// mongoose usable schema
 export const ExternalUser = typedModel('external_users', ExternalUserSchema);
+// usable type extracted
 export type IExternalUser = ExtractInterface<typeof ExternalUser>;
+// interface to be used in angular
+export interface IBookingUser {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  permissions: {
+    admin: boolean;
+    orders: boolean;
+    reports: boolean;
+    activityLog: boolean;
+  };
+  exp: number;
+  iat: number;
+  clientId: string;
+  clientName: string;
+  googleId?: string;
+  microsoftId?: string;
+}

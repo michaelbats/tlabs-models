@@ -1,6 +1,6 @@
 {
   "name": "@tlabs/models",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Typescript Interfaces and models for TL apps",
   "main": "index.js",
   "repository": "https://github.com/michaelbats/tlabs-models.git",
@@ -9,9 +9,6 @@
   "private": false,
   "dependencies": {
     "ts-mongoose": "^0.0.16"
-  },
-  "peerDependencies": {
-    "mongoose": "5.4.19"
   },
   "devDependencies": {
     "@types/mongoose": "^5.5.6",
