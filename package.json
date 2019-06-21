@@ -6,7 +6,6 @@
   "repository": "https://github.com/michaelbats/TLModels.git",
   "author": "Sebastian Gug",
   "license": "All rights reserved",
-  "private": true,
   "dependencies": {
     "ts-mongoose": "^0.0.16"
   }
