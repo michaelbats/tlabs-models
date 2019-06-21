@@ -1,7 +1,6 @@
 import { createSchema, Type, typedModel } from 'ts-mongoose';
 import { ExtractInterface } from '../utils/type-extractors';
 
-// Used to get types + schema
 const ExternalUserSchema = createSchema({
   _id: Type.string({ required: true }),
   signedIn: Type.boolean({ required: true, default: false }),
@@ -22,11 +21,13 @@ const ExternalUserSchema = createSchema({
   })
 });
 
-// mongoose usable schema
+/** Use this to interact with the 'external_users' collection in mongodb */
 export const ExternalUser = typedModel('external_users', ExternalUserSchema);
-// usable type extracted
+
+/** Interface extracted from ExternalUser with the 'Document' parts removed */
 export type IExternalUser = ExtractInterface<typeof ExternalUser>;
-// interface to be used in angular
+
+/** frontend interface of how the user object returned from the token upon authentication, to be used on frontend */
 export interface IBookingUser {
   _id: string;
   firstname: string;

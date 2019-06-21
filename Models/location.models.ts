@@ -1,10 +1,10 @@
-import { createSchema, Type, typedModel } from './node_modules/ts-mongoose';
+import { createSchema, Type, typedModel } from 'ts-mongoose';
 import { ExtractInterface } from '../utils/type-extractors';
 
 // GEOMETRY
 const Geometry = createSchema({
   type: Type.string({ required: true }),
-  coordinates: Type.array().of(Type.number())
+  coordinates: Type.array({ required: true }).of(Type.number())
 });
 const G = typedModel('', Geometry);
 
