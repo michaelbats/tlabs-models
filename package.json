@@ -1,11 +1,12 @@
 {
-  "name": "Models",
-  "version": "0.0.1",
+  "name": "@tlabs/models",
+  "version": "0.0.2",
   "description": "Typescript Interfaces and models for TL apps",
   "main": "index.js",
   "repository": "https://github.com/michaelbats/TLModels.git",
   "author": "Sebastian Gug",
   "license": "All rights reserved",
+  "private": false,
   "dependencies": {
     "ts-mongoose": "^0.0.16"
   }

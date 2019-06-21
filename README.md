@@ -1,11 +1,11 @@
-# @TL/Models
+# @TLabs/Models
 
 Typescript interfaces + mongoose schemas combined into one to be used across all ThamesLabs Projects
 
 ## Getting Started
 
 ```
-yarn add tl-models
+yarn add @tlabs/models
 ```
 
 ## Built With
