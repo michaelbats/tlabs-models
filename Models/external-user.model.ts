@@ -31,6 +31,7 @@ export interface IBookingUser {
   _id: string;
   firstname: string;
   lastname: string;
+  signedIn: boolean;
   email: string;
   permissions: {
     admin: boolean;
