@@ -27,7 +27,7 @@ export const ExternalUser = typedModel('external_users', ExternalUserSchema);
 export type IExternalUser = ExtractProps<typeof ExternalUserSchema>;
 
 /** frontend interface of how the user object returned from the token upon authentication, to be used on frontend */
-export interface IBookingUser {
+export interface IJWTUser {
   _id: string;
   firstname: string;
   lastname: string;

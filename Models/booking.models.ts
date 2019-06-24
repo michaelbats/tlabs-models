@@ -1,6 +1,6 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 import { SiteSchema } from './site.models';
-import { ElementSchema } from './client.models';
+import { ElementSchema } from './shared.models';
 
 const BookingSchema = createSchema({
   _id: Type.optionalString({ required: true }),

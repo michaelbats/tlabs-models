@@ -1,5 +1,6 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 import { SiteSchema } from './site.models';
+import { GoogleFileSchema, GoogleFolderSchema } from './shared.models';
 
 const ScheduleOfRatesSchema = createSchema({
   _id: Type.string({ required: true }),
@@ -20,16 +21,6 @@ const ScheduleOfRatesSchema = createSchema({
   reference: Type.optionalNumber()
 });
 
-export const ElementSchema = createSchema({
-  _id: Type.string({ required: true }),
-  name: Type.string({ required: true }),
-  description: Type.string({ required: true }),
-  duration: Type.number({ required: true, default: 0 }),
-  price: Type.number({ required: true, default: 0 }),
-  priceWeekend: Type.number({ required: true, default: 0 }),
-  reference: Type.number({ required: true })
-});
-
 const ClientSchema = createSchema({
   _id: Type.string({ required: true }),
   TLAccount: Type.optionalString(),
@@ -45,19 +36,8 @@ const ClientSchema = createSchema({
   city: Type.optionalString(),
   county: Type.optionalString(),
   createdAt: Type.optionalString(),
-  files: Type.optionalArray().of(
-    Type.object().of({
-      fileId: Type.string({ required: true }),
-      fileName: Type.string({ required: true }),
-      fileUrl: Type.string({ required: true }),
-      hideFromEngineer: Type.boolean({ required: true })
-    })
-  ),
-  googleFolder: Type.optionalObject().of({
-    id: Type.string({ required: true }),
-    name: Type.string({ required: true }),
-    url: Type.string({ required: true })
-  }),
+  files: Type.optionalArray().of(Type.schema().of(GoogleFileSchema)),
+  googleFolder: Type.optionalObject().of(Type.schema().of(GoogleFolderSchema)),
   hasOwnScheduleOfRates: Type.optionalBoolean(),
   isContractor: Type.optionalBoolean(),
   name: Type.optionalString(),
@@ -82,4 +62,3 @@ const ClientSchema = createSchema({
 
 export const Client = typedModel('clients', ClientSchema);
 export type IClient = ExtractProps<typeof ClientSchema>;
-export type IElement = ExtractProps<typeof ElementSchema>;

@@ -1,6 +1,6 @@
 {
   "name": "@tlabs/models",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Typescript Interfaces and models for TL apps",
   "main": "index.js",
   "repository": "https://github.com/michaelbats/tlabs-models.git",
