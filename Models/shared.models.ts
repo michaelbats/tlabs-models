@@ -78,9 +78,29 @@ export const SamplesSchema = createSchema({
   teamsReport: Type.optionalString()
 });
 
+export const ScheduleOfRatesSchema = createSchema({
+  _id: Type.string({ required: true }),
+  title: Type.string({ required: true }),
+  normalHourse: Type.optionalNumber({ default: 0 }),
+  weekend: Type.optionalNumber({ default: 0 }),
+  duration: Type.optionalNumber({ default: 0 }),
+  internalProcedure: Type.optionalString(),
+  description: Type.optionalString(),
+  reqSqills: Type.optionalArray().of(Type.string()),
+  teamsAppointmentType: Type.optionalString(),
+  teamsSurveyType: Type.optionalString(),
+  teamsPropertyType: Type.optionalString(),
+  teamsDistanceBand: Type.optionalString(),
+  numberOfPumps: Type.optionalNumber(),
+  teamsAirTestType: Type.optionalString(),
+  elements: Type.optionalArray().of(Type.string()),
+  reference: Type.optionalNumber()
+});
+
 export type ISamples = ExtractProps<typeof SamplesSchema>;
 export type IWorlflow = ExtractProps<typeof WorkflowSchema>;
 export type IRequirements = ExtractProps<typeof RequirementsSchema>;
 export type IGoogleFile = ExtractProps<typeof GoogleFileSchema>;
 export type IGoogleFolder = ExtractProps<typeof GoogleFolderSchema>;
 export type IElement = ExtractProps<typeof ElementSchema>;
+export type IScheduleOfRates = ExtractProps<typeof ScheduleOfRatesSchema>;

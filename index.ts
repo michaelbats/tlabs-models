@@ -9,3 +9,6 @@ export * from './models/job.models';
 export * from './models/contact.models';
 export * from './models/job.models';
 export * from './models/user.models';
+export * from './models/system.models';
+export * from './models/task.models';
+export * from './models/activity.model';

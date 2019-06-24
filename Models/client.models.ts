@@ -1,25 +1,10 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 import { SiteSchema } from './site.models';
-import { GoogleFileSchema, GoogleFolderSchema } from './shared.models';
-
-const ScheduleOfRatesSchema = createSchema({
-  _id: Type.string({ required: true }),
-  title: Type.string({ required: true }),
-  normalHourse: Type.optionalNumber({ default: 0 }),
-  weekend: Type.optionalNumber({ default: 0 }),
-  duration: Type.optionalNumber({ default: 0 }),
-  internalProcedure: Type.optionalString(),
-  description: Type.optionalString(),
-  reqSqills: Type.optionalArray().of(Type.string()),
-  teamsAppointmentType: Type.optionalString(),
-  teamsSurveyType: Type.optionalString(),
-  teamsPropertyType: Type.optionalString(),
-  teamsDistanceBand: Type.optionalString(),
-  numberOfPumps: Type.optionalNumber(),
-  teamsAirTestType: Type.optionalString(),
-  elements: Type.optionalArray().of(Type.string()),
-  reference: Type.optionalNumber()
-});
+import {
+  GoogleFileSchema,
+  GoogleFolderSchema,
+  ScheduleOfRatesSchema
+} from './shared.models';
 
 const ClientSchema = createSchema({
   _id: Type.string({ required: true }),

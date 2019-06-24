@@ -32,7 +32,7 @@ const WorkSchema = createSchema({
     quoteRate: Type.number({ required: true }),
     quantity: Type.number({ required: true, default: 1 }),
     requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
-    elements: Type.optionalArray().of(Type.schema().of(ElementSchema))
+    elements: Type.optionalArray().of(Type.string())
   }),
   completed: Type.boolean({ required: true, default: false })
 });

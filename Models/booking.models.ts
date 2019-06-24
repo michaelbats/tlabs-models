@@ -1,6 +1,4 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-import { SiteSchema } from './site.models';
-import { ElementSchema } from './shared.models';
 
 const BookingSchema = createSchema({
   _id: Type.optionalString({ required: true }),
@@ -26,7 +24,7 @@ const BookingSchema = createSchema({
   statusDate: Type.optionalDate(),
   ended: Type.optionalBoolean(),
   workCompleted: Type.optionalBoolean(),
-  elementCompleted: Type.optionalArray().of(Type.schema().of(ElementSchema)),
+  elementCompleted: Type.optionalArray().of(Type.string()),
   imageId: Type.optionalString(),
   confirmationCode: Type.optionalString(),
   confirmationCodeReason: Type.optionalString(),

@@ -1,7 +1,6 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 import {
   GoogleFileSchema,
-  WorkflowStepsSchemas,
   RequirementsSchema,
   GoogleFolderSchema,
   WorkflowSchema
