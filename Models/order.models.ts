@@ -1,4 +1,11 @@
-import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
+import {
+  createSchema,
+  Type,
+  typedModel,
+  ExtractProps,
+  ExtractSchema
+} from 'ts-mongoose';
+import { SiteSchema } from './site.models';
 
 const SurveySchema = createSchema({
   scheduleId: Type.string({ required: true }),
@@ -88,17 +95,6 @@ const ResidentSchema = createSchema({
   details: Type.optionalString
 });
 
-const SiteSchema = createSchema({
-  isNew: Type.boolean({ required: true }),
-  UPRN: Type.string({ required: true }),
-  UPRNLabel: Type.string({ required: true }),
-  postcode: Type.string({ required: true }),
-  addressLine1: Type.string({ required: true }),
-  city: Type.string({ required: true }),
-  county: Type.string({ required: true }),
-  mandatoryInduction: Type.boolean({ required: true })
-});
-
 const OrderSchema = createSchema({
   _id: Type.string({ required: true }),
   status: Type.string({ required: true, default: 'draft' }),
@@ -114,4 +110,3 @@ export const Order = typedModel('orders', OrderSchema);
 export type IOrder = ExtractProps<typeof OrderSchema>;
 export type IOrderProperty = ExtractProps<typeof SiteSchema>;
 export type IOrderResident = ExtractProps<typeof ResidentSchema>;
-export type IOrderSite = ExtractProps<typeof SiteSchema>;
