@@ -20,7 +20,7 @@ const ScheduleOfRatesSchema = createSchema({
   reference: Type.optionalNumber()
 });
 
-const ElementSchema = createSchema({
+export const ElementSchema = createSchema({
   _id: Type.string({ required: true }),
   name: Type.string({ required: true }),
   description: Type.string({ required: true }),
