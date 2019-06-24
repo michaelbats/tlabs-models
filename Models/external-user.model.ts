@@ -1,5 +1,4 @@
-import { createSchema, Type, typedModel } from 'ts-mongoose';
-import { ExtractInterface } from '../utils/type-extractors';
+import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 
 const ExternalUserSchema = createSchema({
   _id: Type.string({ required: true }),
@@ -25,7 +24,7 @@ const ExternalUserSchema = createSchema({
 export const ExternalUser = typedModel('external_users', ExternalUserSchema);
 
 /** Interface extracted from ExternalUser with the 'Document' parts removed */
-export type IExternalUser = ExtractInterface<typeof ExternalUser>;
+export type IExternalUser = ExtractProps<typeof ExternalUserSchema>;
 
 /** frontend interface of how the user object returned from the token upon authentication, to be used on frontend */
 export interface IBookingUser {

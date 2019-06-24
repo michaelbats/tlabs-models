@@ -1,5 +1,4 @@
-import { createSchema, Type, typedModel } from 'ts-mongoose';
-import { ExtractInterface } from '../utils/type-extractors';
+import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 
 // Used to get types + schema
 const OrderSchema = createSchema({
@@ -8,6 +7,6 @@ const OrderSchema = createSchema({
 });
 
 // mongoose usable schema
-export const Order = typedModel('external_users', OrderSchema);
+export const Order = typedModel('orders', OrderSchema);
 // usable type extracted
-export type IOrder = ExtractInterface<typeof Order>;
+export type IOrder = ExtractProps<typeof OrderSchema>;

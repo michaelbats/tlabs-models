@@ -1,12 +1,10 @@
-import { createSchema, Type, typedModel } from 'ts-mongoose';
-import { ExtractInterface } from '../utils/type-extractors';
+import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 
 // GEOMETRY
 const Geometry = createSchema({
   type: Type.string({ required: true }),
-  coordinates: Type.array({ required: true }).of(Type.number())
+  coordinates: Type.optionalMixed({ required: true }) as [number, number]
 });
-const G = typedModel('', Geometry);
 
 // PROPERTIES
 const Properties = createSchema({
@@ -16,7 +14,6 @@ const Properties = createSchema({
   addressLine1: Type.optionalString(),
   postcode: Type.optionalString()
 });
-const P = typedModel('', Properties);
 
 // LOCATIONS COLLECTION MONGOOSE SCHEMA
 const LocationsSchema = createSchema({
@@ -31,10 +28,10 @@ const LocationsSchema = createSchema({
 // ALL EXPORTS:
 // MAIN EXPORT
 export const Locations = typedModel('locations', LocationsSchema);
-export type ILocations = ExtractInterface<typeof Locations>;
+export type ILocations = ExtractProps<typeof LocationsSchema>;
 // SECONDARY STUFF
-export type IGeometry = ExtractInterface<typeof G>;
-export type IProperties = ExtractInterface<typeof P>;
+export type IGeometry = ExtractProps<typeof Geometry>;
+export type IProperties = ExtractProps<typeof Properties>;
 export interface IGeoJson {
   type: string;
   geometry: IGeometry;
