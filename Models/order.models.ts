@@ -14,7 +14,7 @@ const OrderSchema = createSchema({
     county: Type.string({ required: true }),
     mandatoryInduction: Type.boolean({ required: true })
   }),
-  survey: Type.object({ required: true }).of({
+  survey: Type.optionalObject().of({
     scheduleId: Type.string({ required: true }),
     property: Type.optionalObject().of({
       type: Type.string({ required: true }),
@@ -92,6 +92,13 @@ const OrderSchema = createSchema({
         })
       })
     })
+  }),
+  resident: Type.optionalObject().of({
+    isVoid: Type.string({ required: true }),
+    name: Type.optionalString(),
+    email: Type.optionalString(),
+    phone: Type.optionalString(),
+    details: Type.optionalString
   })
 });
 

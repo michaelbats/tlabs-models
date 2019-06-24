@@ -3,7 +3,10 @@ import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 // GEOMETRY
 const Geometry = createSchema({
   type: Type.string({ required: true }),
-  coordinates: Type.optionalMixed({ required: true }) as [number, number]
+  coordinates: Type.array({ required: true }).of(Type.number()) as [
+    number,
+    number
+  ]
 });
 
 // PROPERTIES
