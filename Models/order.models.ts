@@ -1,112 +1,106 @@
-import {
-  createSchema,
-  Type,
-  typedModel,
-  ExtractProps,
-  ExtractSchema
-} from 'ts-mongoose';
-import { SiteSchema } from './site.models';
+import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
+import { SiteObject } from './site.models';
 
-const SurveySchema = createSchema({
-  scheduleId: Type.string({ required: true }),
+const SurveyObject = {
+  scheduleId: Type.string(),
   property: Type.optionalObject().of({
-    type: Type.string({ required: true }),
-    totalFloors: Type.number({ required: true }),
-    allProperty: Type.object({ required: true }).of({
-      flooring: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+    type: Type.string(),
+    totalFloors: Type.number(),
+    allProperty: Type.object().of({
+      flooring: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      windows: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      windows: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      heating: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      heating: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      roof: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      roof: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      ceiling: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      ceiling: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      externalWalls: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      externalWalls: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      intercom: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      intercom: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      rewire: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      rewire: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       })
     }),
-    utilities: Type.object({ required: true }).of({
-      boiler: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+    utilities: Type.object().of({
+      boiler: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       })
     }),
-    kitchen: Type.object({ required: true }).of({
-      furniture: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+    kitchen: Type.object().of({
+      furniture: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      flooring: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      flooring: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      detectors: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      detectors: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      windows: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      windows: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      ceiling: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      ceiling: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       })
     }),
-    bathroom: Type.object({ required: true }).of({
-      toilet: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+    bathroom: Type.object().of({
+      toilet: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       }),
-      tiles: Type.object({ required: true }).of({
-        survey: Type.boolean({ required: true }),
+      tiles: Type.object().of({
+        survey: Type.boolean(),
         details: Type.optionalString()
       })
     })
   })
-});
+};
 
-const ResidentSchema = createSchema({
-  isVoid: Type.string({ required: true }),
+const ResidentObject = {
+  isVoid: Type.string(),
   name: Type.optionalString(),
   email: Type.optionalString(),
   phone: Type.optionalString(),
   details: Type.optionalString
-});
+};
+const ResidentSchema = createSchema({ ResidentObject });
 
 const OrderSchema = createSchema({
-  _id: Type.string({ required: true }),
-  status: Type.string({ required: true, default: 'draft' }),
-  clientId: Type.string({ required: true }),
-  site: Type.schema({ required: true }).of(SiteSchema),
-  survey: Type.optionalSchema().of(SurveySchema),
-  resident: Type.optionalSchema().of(ResidentSchema)
+  _id: Type.string(),
+  status: Type.string({ default: 'draft' }),
+  clientId: Type.string(),
+  site: Type.object().of(SiteObject),
+  survey: Type.optionalObject().of(SurveyObject),
+  resident: Type.optionalObject().of(ResidentObject)
 });
 
 // mongoose usable schema
 export const Order = typedModel('orders', OrderSchema);
 // usable type extracted
 export type IOrder = ExtractProps<typeof OrderSchema>;
-export type IOrderProperty = ExtractProps<typeof SiteSchema>;
 export type IOrderResident = ExtractProps<typeof ResidentSchema>;

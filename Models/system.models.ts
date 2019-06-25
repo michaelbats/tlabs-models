@@ -1,8 +1,8 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 import {
-  ElementSchema,
-  ScheduleOfRatesSchema,
-  GoogleFileSchema
+  ElementObject,
+  ScheduleOfRatesObject,
+  GoogleFileObject
 } from './shared.models';
 
 const SystemSchema = createSchema({
@@ -46,7 +46,7 @@ const SystemSchema = createSchema({
           _id: Type.string()
         })
       ),
-      elements: Type.array().of(Type.schema().of(ElementSchema)),
+      elements: Type.array().of(Type.object().of(ElementObject)),
       cancellationReasons: Type.array().of(
         Type.object().of({ name: Type.string(), _id: Type.string() })
       ),
@@ -56,12 +56,12 @@ const SystemSchema = createSchema({
     })
   ),
   rag: Type.object().of({ danger: Type.number(), warniing: Type.number() }),
-  scheduleOfRates: Type.array().of(Type.schema().of(ScheduleOfRatesSchema)),
+  scheduleOfRates: Type.array().of(Type.object().of(ScheduleOfRatesObject)),
   lastSiteDownload: Type.date(),
   callScript: Type.string(),
   lastJobDownload: Type.date(),
   reportEmailText: Type.string(),
-  latestJobsOutputReport: Type.schema().of(GoogleFileSchema),
+  latestJobsOutputReport: Type.object().of(GoogleFileObject),
   reportEmail: Type.string(),
   currentTLuprn: Type.number(),
   dayEnd: Type.string(),

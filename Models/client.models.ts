@@ -1,13 +1,13 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-import { SiteSchema } from './site.models';
+import { SiteObject } from './site.models';
 import {
-  GoogleFileSchema,
-  GoogleFolderSchema,
-  ScheduleOfRatesSchema
+  GoogleFileObject,
+  GoogleFolderObject,
+  ScheduleOfRatesObject
 } from './shared.models';
 
 const ClientSchema = createSchema({
-  _id: Type.string({ required: true }),
+  _id: Type.string(),
   TLAccount: Type.optionalString(),
   TLAdmin: Type.optionalString(),
   TLTechnical: Type.optionalString(),
@@ -21,8 +21,8 @@ const ClientSchema = createSchema({
   city: Type.optionalString(),
   county: Type.optionalString(),
   createdAt: Type.optionalString(),
-  files: Type.optionalArray().of(Type.schema().of(GoogleFileSchema)),
-  googleFolder: Type.optionalObject().of(Type.schema().of(GoogleFolderSchema)),
+  files: Type.optionalArray().of(Type.object().of(GoogleFileObject)),
+  googleFolder: Type.optionalObject().of(Type.object().of(GoogleFolderObject)),
   hasOwnScheduleOfRates: Type.optionalBoolean(),
   isContractor: Type.optionalBoolean(),
   name: Type.optionalString(),
@@ -30,16 +30,16 @@ const ClientSchema = createSchema({
   ownerId: Type.optionalString(),
   postcode: Type.optionalString(),
   reportEmail: Type.optionalObject().of({
-    body: Type.string({ required: true }),
-    subject: Type.string({ required: true }),
-    subjectUrgent: Type.string({ required: true })
+    body: Type.string(),
+    subject: Type.string(),
+    subjectUrgent: Type.string()
   }),
   sageReference: Type.optionalString(),
   scheduleOfRates: Type.optionalArray().of(
-    Type.schema().of(ScheduleOfRatesSchema)
+    Type.object().of(ScheduleOfRatesObject)
   ),
   sector: Type.optionalString(),
-  sites: Type.optionalArray().of(Type.schema().of(SiteSchema)),
+  sites: Type.optionalArray().of(Type.object().of(SiteObject)),
   tags: Type.optionalArray().of(Type.string()),
   teamsId: Type.optionalString(),
   telephone: Type.optionalString()

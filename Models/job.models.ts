@@ -1,14 +1,13 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-import { SiteSchema } from './site.models';
+import { SiteObject } from './site.models';
 import {
-  RequirementsSchema,
-  ElementSchema,
-  WorkflowSchema,
-  SamplesSchema,
-  GoogleFileSchema
+  RequirementsObject,
+  WorkflowObject,
+  SamplesObject,
+  GoogleFileObject
 } from './shared.models';
 
-const WorkSchema = createSchema({
+const WorkObject = {
   likelihood: Type.string() as
     | 'Certain/Guaranteed'
     | 'Likely'
@@ -27,27 +26,27 @@ const WorkSchema = createSchema({
   projectManagerTel: Type.optionalString(),
   siteContactTel: Type.optionalString(),
   notes: Type.optionalString(),
-  workType: Type.object({ required: true }).of({
-    TLtype: Type.string({ required: true }),
-    quoteRate: Type.number({ required: true }),
-    quantity: Type.number({ required: true, default: 1 }),
-    requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
+  workType: Type.object().of({
+    TLtype: Type.string(),
+    quoteRate: Type.number(),
+    quantity: Type.number({ default: 1 }),
+    requirements: Type.optionalArray().of(Type.object().of(RequirementsObject)),
     elements: Type.optionalArray().of(Type.string())
   }),
-  completed: Type.boolean({ required: true, default: false })
-});
+  completed: Type.boolean({ default: false })
+};
 
 const JobSchema = createSchema({
-  _id: Type.optionalObject({ required: true }),
-  title: Type.string({ required: true }),
-  reference: Type.number({ required: true }),
-  batchId: Type.string({ required: true }),
-  batchName: Type.string({ required: true }),
-  projectId: Type.string({ required: true }),
-  projectName: Type.string({ required: true }),
-  clientId: Type.string({ required: true }),
-  clientName: Type.string({ required: true }),
-  status: Type.string({ required: true, default: 'Not Booked' }) as
+  _id: Type.optionalObject(),
+  title: Type.string(),
+  reference: Type.number(),
+  batchId: Type.string(),
+  batchName: Type.string(),
+  projectId: Type.string(),
+  projectName: Type.string(),
+  clientId: Type.string(),
+  clientName: Type.string(),
+  status: Type.string({ default: 'Not Booked' }) as
     | 'Not Booked'
     | 'Booked'
     | 'Finished',
@@ -58,8 +57,8 @@ const JobSchema = createSchema({
   lowerLimit: Type.optionalDate(),
   higherLimit: Type.optionalDate(),
   deletionRequestedBy: Type.optionalString(),
-  site: Type.schema({ required: true }).of(SiteSchema),
-  contact: Type.object({ required: true }).of({
+  site: Type.object().of(SiteObject),
+  contact: Type.object().of({
     name: Type.optionalString(),
     phone: Type.optionalString(),
     mobile: Type.optionalString(),
@@ -71,8 +70,8 @@ const JobSchema = createSchema({
   purchaseOrder: Type.optionalString(),
   twoMen: Type.boolean({ default: false }),
   sendReport: Type.boolean({ default: true }),
-  work: Type.schema({ required: true }).of(WorkSchema),
-  requirements: Type.optionalArray().of(RequirementsSchema),
+  work: Type.object().of(WorkObject),
+  requirements: Type.optionalArray().of(Type.object().of(RequirementsObject)),
   failure: Type.optionalObject().of({
     reason: Type.string({ default: 'No Answer' }) as
       | 'No Answer'
@@ -82,15 +81,15 @@ const JobSchema = createSchema({
       | 'Callback Requested',
     notes: Type.optionalString()
   }),
-  workflow: Type.optionalSchema().of(WorkflowSchema),
-  samples: Type.optionalSchema().of(SamplesSchema),
-  files: Type.optionalArray().of(Type.schema().of(GoogleFileSchema)),
+  workflow: Type.optionalObject().of(WorkflowObject),
+  samples: Type.optionalObject().of(SamplesObject),
+  files: Type.optionalArray().of(Type.object().of(GoogleFileObject)),
   reportFileIds: Type.optionalArray().of(Type.string()),
   reportDraftGenerated: Type.optionalBoolean({ default: false }),
   riskAssessments: Type.optionalArray().of(Type.string()),
   tags: Type.optionalArray().of(Type.string()),
-  createdBy: Type.string({ required: true }),
-  createdAt: Type.date({ required: true, default: new Date(Date.now()) })
+  createdBy: Type.string(),
+  createdAt: Type.date({ default: new Date(Date.now()) })
 });
 
 export const Job = typedModel('jobs', JobSchema);

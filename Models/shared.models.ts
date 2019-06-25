@@ -1,23 +1,32 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 
-export const GoogleFileSchema = createSchema({
-  fileId: Type.string({ required: true }),
-  fileName: Type.string({ required: true }),
-  fileUrl: Type.string({ required: true }),
-  hideFromEngineer: Type.boolean({ required: true })
-});
+export const GoogleFileObject = {
+  fileId: Type.string(),
+  fileName: Type.string(),
+  fileUrl: Type.string(),
+  hideFromEngineer: Type.boolean()
+};
+const GoogleFileSchema = createSchema(GoogleFileObject);
 
-export const ElementSchema = createSchema({
-  _id: Type.string({ required: true }),
-  name: Type.string({ required: true }),
-  description: Type.string({ required: true }),
+export const GoogleFolderObject = {
+  id: Type.string(),
+  name: Type.string(),
+  url: Type.string()
+};
+const GoogleFolderSchema = createSchema(GoogleFolderObject);
+
+export const ElementObject = {
+  _id: Type.string(),
+  name: Type.string(),
+  description: Type.string(),
   duration: Type.number({ required: true, default: 0 }),
   price: Type.number({ required: true, default: 0 }),
   priceWeekend: Type.number({ required: true, default: 0 }),
-  reference: Type.number({ required: true })
-});
+  reference: Type.number()
+};
+const ElementSchema = createSchema(ElementObject);
 
-export const WorkflowStepsSchemas = createSchema({
+export const WorkflowStepsObject = {
   numberOfDays: Type.optionalNumber(),
   steps: Type.optionalArray().of(
     Type.optionalObject().of({
@@ -30,28 +39,24 @@ export const WorkflowStepsSchemas = createSchema({
       label: Type.optionalString()
     })
   )
-});
+};
 
-export const RequirementsSchema = createSchema({
-  reqId: Type.string({ required: true }),
-  quantity: Type.number({ required: true }),
-  clientCost: Type.number({ required: true }),
-  externalCost: Type.number({ required: true })
-});
+export const RequirementsObject = {
+  reqId: Type.string(),
+  quantity: Type.number(),
+  clientCost: Type.number(),
+  externalCost: Type.number()
+};
+const RequirementsSchema = createSchema(RequirementsObject);
 
-export const GoogleFolderSchema = createSchema({
-  id: Type.string({ required: true }),
-  name: Type.string({ required: true }),
-  url: Type.string({ required: true })
-});
+export const WorkflowObject = {
+  presite: Type.optionalObject().of(WorkflowStepsObject),
+  site: Type.optionalObject().of(WorkflowStepsObject),
+  postsite: Type.optionalObject().of(WorkflowStepsObject)
+};
+const WorkflowSchema = createSchema(WorkflowObject);
 
-export const WorkflowSchema = createSchema({
-  presite: Type.optionalSchema().of(WorkflowStepsSchemas),
-  site: Type.optionalSchema().of(WorkflowStepsSchemas),
-  postsite: Type.optionalSchema().of(WorkflowStepsSchemas)
-});
-
-export const SamplesSchema = createSchema({
+export const SamplesObject = {
   quantity: Type.optionalNumber(),
   trackingCode: Type.optionalString(),
   isUrgent: Type.optionalBoolean(),
@@ -76,11 +81,12 @@ export const SamplesSchema = createSchema({
     | 'Admin Issues'
     | 'Other',
   teamsReport: Type.optionalString()
-});
+};
+const SamplesSchema = createSchema(SamplesObject);
 
-export const ScheduleOfRatesSchema = createSchema({
-  _id: Type.string({ required: true }),
-  title: Type.string({ required: true }),
+export const ScheduleOfRatesObject = {
+  _id: Type.string(),
+  title: Type.string(),
   normalHourse: Type.optionalNumber({ default: 0 }),
   weekend: Type.optionalNumber({ default: 0 }),
   duration: Type.optionalNumber({ default: 0 }),
@@ -95,7 +101,8 @@ export const ScheduleOfRatesSchema = createSchema({
   teamsAirTestType: Type.optionalString(),
   elements: Type.optionalArray().of(Type.string()),
   reference: Type.optionalNumber()
-});
+};
+const ScheduleOfRatesSchema = createSchema(ScheduleOfRatesObject);
 
 export type ISamples = ExtractProps<typeof SamplesSchema>;
 export type IWorlflow = ExtractProps<typeof WorkflowSchema>;

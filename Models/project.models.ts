@@ -1,33 +1,33 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 import {
-  GoogleFileSchema,
-  RequirementsSchema,
-  GoogleFolderSchema,
-  WorkflowSchema
+  GoogleFileObject,
+  RequirementsObject,
+  GoogleFolderObject,
+  WorkflowObject
 } from './shared.models';
-import { SiteSchema } from './site.models';
+import { SiteObject } from './site.models';
 
 const ProjectSchema = createSchema({
-  _id: Type.string({ required: true }),
+  _id: Type.string(),
   teamsId: Type.optionalString(),
   scopeOfWorks: Type.optionalString(),
   engineerNote: Type.optionalString(),
   reference: Type.optionalNumber(),
   sourceQuoteId: Type.optionalString(),
-  clientId: Type.string({ required: true }),
-  clientName: Type.string({ required: true }),
+  clientId: Type.string(),
+  clientName: Type.string(),
   quoteRequestedBy: Type.optionalString(),
   quotePreparedBy: Type.optionalString(),
   isActive: Type.boolean({ default: false }),
   isCompleted: Type.boolean({ default: false }),
   activationDate: Type.optionalDate(),
   endDate: Type.optionalDate(),
-  latestJobsOutputReport: Type.optionalSchema().of(GoogleFileSchema),
+  latestJobsOutputReport: Type.optionalObject().of(GoogleFileObject),
   documents: Type.optionalArray().of(Type.string()),
   purchaseOrder: Type.optionalString(),
   callScript: Type.optionalString(),
   allowedWorkTypes: Type.optionalArray().of(Type.string()),
-  sites: Type.optionalArray().of(Type.schema().of(SiteSchema)),
+  sites: Type.optionalArray().of(Type.object().of(SiteObject)),
   team: Type.optionalObject().of({
     admin: Type.optionalArray().of(Type.string()),
     engineers: Type.optionalArray().of(Type.string()),
@@ -43,7 +43,7 @@ const ProjectSchema = createSchema({
       jobStatus: Type.optionalString()
     })
   ),
-  workflow: Type.optionalSchema().of(WorkflowSchema),
+  workflow: Type.optionalObject().of(WorkflowObject),
   compliance: Type.optionalObject().of({
     hasMethodStatement: Type.optionalBoolean(),
     hasScheduleOfRates: Type.optionalBoolean(),
@@ -51,13 +51,13 @@ const ProjectSchema = createSchema({
     raiseInvoice: Type.string() as 'manual' | 'automatic' | 'bulk'
   }),
   riskAssessments: Type.optionalArray().of(Type.string()),
-  requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
-  googleFolder: Type.optionalSchema().of(GoogleFolderSchema),
-  files: Type.optionalArray().of(Type.schema().of(GoogleFileSchema)),
+  requirements: Type.optionalArray().of(Type.object().of(RequirementsObject)),
+  googleFolder: Type.optionalObject().of(GoogleFolderObject),
+  files: Type.optionalArray().of(Type.object().of(GoogleFileObject)),
   sendReports: Type.optionalBoolean({ default: true }),
   tags: Type.optionalArray().of(Type.string()),
-  createdBy: Type.string({ required: true }),
-  createdAt: Type.date({ required: true, default: new Date(Date.now()) })
+  createdBy: Type.string(),
+  createdAt: Type.date({ default: new Date(Date.now()) })
 });
 
 export const Project = typedModel('projects', ProjectSchema);
