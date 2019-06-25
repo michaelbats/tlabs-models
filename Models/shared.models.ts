@@ -92,7 +92,7 @@ export const ScheduleOfRatesObject = {
   duration: Type.optionalNumber({ default: 0 }),
   internalProcedure: Type.optionalString(),
   description: Type.optionalString(),
-  reqSqills: Type.optionalArray().of(Type.string()),
+  reqSkills: Type.optionalArray().of(Type.string()),
   teamsAppointmentType: Type.optionalString(),
   teamsSurveyType: Type.optionalString(),
   teamsPropertyType: Type.optionalString(),
