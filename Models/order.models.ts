@@ -94,6 +94,13 @@ const OrderSchema = createSchema({
   _id: Type.string(),
   status: Type.string({ default: 'draft' }),
   clientId: Type.string(),
+  createdAt: Type.optionalDate({
+    required: true,
+    default: new Date(Date.now())
+  }),
+  updatedAt: Type.optionalDate({ required: true }),
+  createdBy: Type.optionalString({ required: true }),
+  updatedBy: Type.optionalString({ required: true }),
   site: Type.object().of(SiteObject),
   survey: Type.optionalObject().of(SurveyObject),
   resident: Type.optionalObject().of(ResidentObject)
