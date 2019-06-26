@@ -184,7 +184,7 @@ sparse-bitfield@^3.0.3:
   dependencies:
     memory-pager "^1.0.2"
 
-ts-mongoose@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/ts-mongoose/-/ts-mongoose-0.0.16.tgz#126bf9856285ad549534d3c941832f030e9e26ef"
-  integrity sha512-69XDCT8PT/IU74YhDVTHLI04tIUx66eusrF4BQFPoDvORh71Nw6UAAKLZOVNoWNjhz2hgJ9vsPf2igOj52Ce9Q==
+ts-mongoose@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/ts-mongoose/-/ts-mongoose-0.0.18.tgz#e49649341e4c14b7c9748c70634ccec413f24b87"
+  integrity sha512-yWpH66s16Ii4YKi28WRLWKRQVFp20zqx1pRB2Q42xn6AUzQazIk/FUIA7gEGralxVeltk6GF1NNIo6WVTmF3kg==
