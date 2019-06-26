@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var shared_models_1 = require("./shared.models");
-var EngineerSchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const shared_models_1 = require("./shared.models");
+const EngineerSchema = ts_mongoose_1.createSchema({
     homePostcode: ts_mongoose_1.Type.optionalString(),
     ratePerHour: ts_mongoose_1.Type.optionalNumber(),
     workingHours: ts_mongoose_1.Type.optionalObject().of({
@@ -39,7 +39,7 @@ var EngineerSchema = ts_mongoose_1.createSchema({
     skills: ts_mongoose_1.Type.optionalArray().of(ts_mongoose_1.Type.string()),
     inductedSites: ts_mongoose_1.Type.optionalArray().of(ts_mongoose_1.Type.string())
 });
-var UserSchema = ts_mongoose_1.createSchema({
+const UserSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.string({ required: true }),
     firstname: ts_mongoose_1.Type.string({ required: true }),
     lastname: ts_mongoose_1.Type.string({ required: true }),
@@ -66,3 +66,4 @@ var UserSchema = ts_mongoose_1.createSchema({
     tags: ts_mongoose_1.Type.optionalArray().of(ts_mongoose_1.Type.string())
 });
 exports.User = ts_mongoose_1.typedModel('users', UserSchema);
+//# sourceMappingURL=user.models.js.map

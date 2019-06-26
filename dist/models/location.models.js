@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
+const ts_mongoose_1 = require("ts-mongoose");
 // GEOMETRY
-var Geometry = ts_mongoose_1.createSchema({
+const Geometry = ts_mongoose_1.createSchema({
     type: ts_mongoose_1.Type.string({ required: true }),
     coordinates: ts_mongoose_1.Type.array({ required: true }).of(ts_mongoose_1.Type.number())
 });
 // PROPERTIES
-var Properties = ts_mongoose_1.createSchema({
+const Properties = ts_mongoose_1.createSchema({
     UPRN: ts_mongoose_1.Type.optionalString(),
     clientId: ts_mongoose_1.Type.optionalString(),
     clientName: ts_mongoose_1.Type.optionalString(),
@@ -15,7 +15,7 @@ var Properties = ts_mongoose_1.createSchema({
     postcode: ts_mongoose_1.Type.optionalString()
 });
 // LOCATIONS COLLECTION MONGOOSE SCHEMA
-var LocationsSchema = ts_mongoose_1.createSchema({
+const LocationsSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.string({ required: true }),
     type: ts_mongoose_1.Type.string({ required: true }),
     geometry: ts_mongoose_1.Type.schema().of(Geometry),
@@ -26,3 +26,4 @@ var LocationsSchema = ts_mongoose_1.createSchema({
 // ALL EXPORTS:
 // MAIN EXPORT
 exports.Locations = ts_mongoose_1.typedModel('locations', LocationsSchema);
+//# sourceMappingURL=location.models.js.map

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var site_models_1 = require("./site.models");
-var shared_models_1 = require("./shared.models");
-var ClientSchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const site_models_1 = require("./site.models");
+const shared_models_1 = require("./shared.models");
+const ClientSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.string(),
     TLAccount: ts_mongoose_1.Type.optionalString(),
     TLAdmin: ts_mongoose_1.Type.optionalString(),
@@ -40,3 +40,4 @@ var ClientSchema = ts_mongoose_1.createSchema({
     telephone: ts_mongoose_1.Type.optionalString()
 });
 exports.Client = ts_mongoose_1.typedModel('clients', ClientSchema);
+//# sourceMappingURL=client.models.js.map

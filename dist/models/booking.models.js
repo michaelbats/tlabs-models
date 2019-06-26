@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var BookingSchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const BookingSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.optionalString({ required: true }),
     jobId: ts_mongoose_1.Type.optionalString(),
     jobName: ts_mongoose_1.Type.optionalString(),
@@ -34,3 +34,4 @@ var BookingSchema = ts_mongoose_1.createSchema({
     createdAt: ts_mongoose_1.Type.optionalDate()
 });
 exports.Booking = ts_mongoose_1.typedModel('bookings', BookingSchema);
+//# sourceMappingURL=booking.models.js.map

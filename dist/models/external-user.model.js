@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var ExternalUserSchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const ExternalUserSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.string({ required: true }),
     signedIn: ts_mongoose_1.Type.boolean({ required: true, default: false }),
     clientId: ts_mongoose_1.Type.string({ required: true }),
@@ -22,3 +22,4 @@ var ExternalUserSchema = ts_mongoose_1.createSchema({
 });
 /** Use this to interact with the 'external_users' collection in mongodb */
 exports.ExternalUser = ts_mongoose_1.typedModel('external_users', ExternalUserSchema);
+//# sourceMappingURL=external-user.model.js.map

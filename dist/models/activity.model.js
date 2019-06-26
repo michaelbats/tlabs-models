@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var ActivitySchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const ActivitySchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.optionalString({ required: true }),
     title: ts_mongoose_1.Type.string({ required: true }),
     details: ts_mongoose_1.Type.string({ required: true }),
@@ -12,3 +12,4 @@ var ActivitySchema = ts_mongoose_1.createSchema({
     createdAt: ts_mongoose_1.Type.date({ default: new Date(Date.now()) })
 });
 exports.Activity = ts_mongoose_1.typedModel('activities', ActivitySchema);
+//# sourceMappingURL=activity.model.js.map

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var shared_models_1 = require("./shared.models");
-var SystemSchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const shared_models_1 = require("./shared.models");
+const SystemSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.string(),
     lists: ts_mongoose_1.Type.array().of(ts_mongoose_1.Type.object().of({
         engineerSkills: ts_mongoose_1.Type.array().of(ts_mongoose_1.Type.object().of({ name: ts_mongoose_1.Type.string(), _id: ts_mongoose_1.Type.string() })),
@@ -55,3 +55,4 @@ var SystemSchema = ts_mongoose_1.createSchema({
     })
 });
 exports.System = ts_mongoose_1.typedModel('system', SystemSchema);
+//# sourceMappingURL=system.models.js.map

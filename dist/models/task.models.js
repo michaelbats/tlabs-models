@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var NextTaskSchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const NextTaskSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.optionalString(),
     title: ts_mongoose_1.Type.string({ required: true }),
     details: ts_mongoose_1.Type.optionalString(),
@@ -11,7 +11,7 @@ var NextTaskSchema = ts_mongoose_1.createSchema({
     assigneeIds: ts_mongoose_1.Type.optionalArray().of(ts_mongoose_1.Type.string()),
     nextTask: ts_mongoose_1.Type.optionalObject()
 });
-var TaskSchema = ts_mongoose_1.createSchema({
+const TaskSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.optionalString({ required: true }),
     title: ts_mongoose_1.Type.string({ required: true }),
     complete: ts_mongoose_1.Type.boolean({ required: true, default: false }),
@@ -34,3 +34,4 @@ var TaskSchema = ts_mongoose_1.createSchema({
     createdAt: ts_mongoose_1.Type.date({ default: new Date(Date.now()) })
 });
 exports.Task = ts_mongoose_1.typedModel('tasks', TaskSchema);
+//# sourceMappingURL=task.models.js.map

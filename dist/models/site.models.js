@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
+const ts_mongoose_1 = require("ts-mongoose");
 exports.SiteObject = {
     _id: ts_mongoose_1.Type.optionalString({ required: true }),
     clientId: ts_mongoose_1.Type.optionalString({ required: true }),
@@ -19,5 +19,6 @@ exports.SiteObject = {
     }),
     teamsId: ts_mongoose_1.Type.optionalString()
 };
-var SiteSchema = ts_mongoose_1.createSchema(exports.SiteObject);
+const SiteSchema = ts_mongoose_1.createSchema(exports.SiteObject);
 exports.Site = ts_mongoose_1.typedModel('sites', SiteSchema);
+//# sourceMappingURL=site.models.js.map

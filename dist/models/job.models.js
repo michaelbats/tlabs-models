@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var site_models_1 = require("./site.models");
-var shared_models_1 = require("./shared.models");
-var WorkObject = {
+const ts_mongoose_1 = require("ts-mongoose");
+const site_models_1 = require("./site.models");
+const shared_models_1 = require("./shared.models");
+const WorkObject = {
     likelihood: ts_mongoose_1.Type.string(),
     nextAvailableSlot: ts_mongoose_1.Type.optionalBoolean(),
     start: ts_mongoose_1.Type.optionalDate(),
@@ -27,7 +27,7 @@ var WorkObject = {
     }),
     completed: ts_mongoose_1.Type.boolean({ default: false })
 };
-var JobSchema = ts_mongoose_1.createSchema({
+const JobSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.optionalObject(),
     title: ts_mongoose_1.Type.string(),
     reference: ts_mongoose_1.Type.number(),
@@ -75,3 +75,4 @@ var JobSchema = ts_mongoose_1.createSchema({
     createdAt: ts_mongoose_1.Type.date({ default: new Date(Date.now()) })
 });
 exports.Job = ts_mongoose_1.typedModel('jobs', JobSchema);
+//# sourceMappingURL=job.models.js.map

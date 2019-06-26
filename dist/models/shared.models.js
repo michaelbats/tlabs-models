@@ -1,19 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
+const ts_mongoose_1 = require("ts-mongoose");
 exports.GoogleFileObject = {
     fileId: ts_mongoose_1.Type.string(),
     fileName: ts_mongoose_1.Type.string(),
     fileUrl: ts_mongoose_1.Type.string(),
     hideFromEngineer: ts_mongoose_1.Type.boolean()
 };
-var GoogleFileSchema = ts_mongoose_1.createSchema(exports.GoogleFileObject);
+const GoogleFileSchema = ts_mongoose_1.createSchema(exports.GoogleFileObject);
 exports.GoogleFolderObject = {
     id: ts_mongoose_1.Type.string(),
     name: ts_mongoose_1.Type.string(),
     url: ts_mongoose_1.Type.string()
 };
-var GoogleFolderSchema = ts_mongoose_1.createSchema(exports.GoogleFolderObject);
+const GoogleFolderSchema = ts_mongoose_1.createSchema(exports.GoogleFolderObject);
 exports.ElementObject = {
     _id: ts_mongoose_1.Type.string(),
     name: ts_mongoose_1.Type.string(),
@@ -23,7 +23,7 @@ exports.ElementObject = {
     priceWeekend: ts_mongoose_1.Type.number({ required: true, default: 0 }),
     reference: ts_mongoose_1.Type.number()
 };
-var ElementSchema = ts_mongoose_1.createSchema(exports.ElementObject);
+const ElementSchema = ts_mongoose_1.createSchema(exports.ElementObject);
 exports.WorkflowStepsObject = {
     numberOfDays: ts_mongoose_1.Type.optionalNumber(),
     steps: ts_mongoose_1.Type.optionalArray().of(ts_mongoose_1.Type.optionalObject().of({
@@ -42,13 +42,13 @@ exports.RequirementsObject = {
     clientCost: ts_mongoose_1.Type.number(),
     externalCost: ts_mongoose_1.Type.number()
 };
-var RequirementsSchema = ts_mongoose_1.createSchema(exports.RequirementsObject);
+const RequirementsSchema = ts_mongoose_1.createSchema(exports.RequirementsObject);
 exports.WorkflowObject = {
     presite: ts_mongoose_1.Type.optionalObject().of(exports.WorkflowStepsObject),
     site: ts_mongoose_1.Type.optionalObject().of(exports.WorkflowStepsObject),
     postsite: ts_mongoose_1.Type.optionalObject().of(exports.WorkflowStepsObject)
 };
-var WorkflowSchema = ts_mongoose_1.createSchema(exports.WorkflowObject);
+const WorkflowSchema = ts_mongoose_1.createSchema(exports.WorkflowObject);
 exports.SamplesObject = {
     quantity: ts_mongoose_1.Type.optionalNumber(),
     trackingCode: ts_mongoose_1.Type.optionalString(),
@@ -64,7 +64,7 @@ exports.SamplesObject = {
     qaIssueType: ts_mongoose_1.Type.string(),
     teamsReport: ts_mongoose_1.Type.optionalString()
 };
-var SamplesSchema = ts_mongoose_1.createSchema(exports.SamplesObject);
+const SamplesSchema = ts_mongoose_1.createSchema(exports.SamplesObject);
 exports.ScheduleOfRatesObject = {
     _id: ts_mongoose_1.Type.string(),
     title: ts_mongoose_1.Type.string(),
@@ -83,4 +83,5 @@ exports.ScheduleOfRatesObject = {
     elements: ts_mongoose_1.Type.optionalArray().of(ts_mongoose_1.Type.string()),
     reference: ts_mongoose_1.Type.optionalNumber()
 };
-var ScheduleOfRatesSchema = ts_mongoose_1.createSchema(exports.ScheduleOfRatesObject);
+const ScheduleOfRatesSchema = ts_mongoose_1.createSchema(exports.ScheduleOfRatesObject);
+//# sourceMappingURL=shared.models.js.map

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var site_models_1 = require("./site.models");
-var SurveyObject = {
+const ts_mongoose_1 = require("ts-mongoose");
+const site_models_1 = require("./site.models");
+const SurveyObject = {
     scheduleId: ts_mongoose_1.Type.string(),
     property: ts_mongoose_1.Type.optionalObject().of({
         type: ts_mongoose_1.Type.string(),
@@ -81,15 +81,15 @@ var SurveyObject = {
         })
     })
 };
-var ResidentObject = {
+const ResidentObject = {
     isVoid: ts_mongoose_1.Type.string(),
     name: ts_mongoose_1.Type.optionalString(),
     email: ts_mongoose_1.Type.optionalString(),
     phone: ts_mongoose_1.Type.optionalString(),
     details: ts_mongoose_1.Type.optionalString
 };
-var ResidentSchema = ts_mongoose_1.createSchema({ ResidentObject: ResidentObject });
-var OrderSchema = ts_mongoose_1.createSchema({
+const ResidentSchema = ts_mongoose_1.createSchema({ ResidentObject });
+const OrderSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.string(),
     status: ts_mongoose_1.Type.string({ default: 'draft' }),
     clientId: ts_mongoose_1.Type.string(),
@@ -106,3 +106,4 @@ var OrderSchema = ts_mongoose_1.createSchema({
 });
 // mongoose usable schema
 exports.Order = ts_mongoose_1.typedModel('orders', OrderSchema);
+//# sourceMappingURL=order.models.js.map

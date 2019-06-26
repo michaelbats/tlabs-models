@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var ContactSchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const ContactSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.optionalString({ required: true }),
     firstname: ts_mongoose_1.Type.string({ required: true }),
     lastname: ts_mongoose_1.Type.string({ required: true }),
@@ -20,3 +20,4 @@ var ContactSchema = ts_mongoose_1.createSchema({
     createdAt: ts_mongoose_1.Type.date({ requried: true, default: new Date(Date.now()) })
 });
 exports.Contact = ts_mongoose_1.typedModel('contacts', ContactSchema);
+//# sourceMappingURL=contact.models.js.map

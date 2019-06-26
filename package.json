@@ -1,8 +1,8 @@
 {
   "name": "@tlabs/models",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Typescript Interfaces and models for TL apps",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/michaelbats/tlabs-models.git",
   "author": "Sebastian Gug",
   "license": "All rights reserved",
@@ -13,5 +13,8 @@
   "devDependencies": {
     "@types/mongoose": "^5.5.6",
     "mongoose": "5.4.19"
+  },
+  "scripts": {
+    "build": "tsc"
   }
 }

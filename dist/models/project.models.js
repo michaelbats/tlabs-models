@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ts_mongoose_1 = require("ts-mongoose");
-var shared_models_1 = require("./shared.models");
-var site_models_1 = require("./site.models");
-var ProjectSchema = ts_mongoose_1.createSchema({
+const ts_mongoose_1 = require("ts-mongoose");
+const shared_models_1 = require("./shared.models");
+const site_models_1 = require("./site.models");
+const ProjectSchema = ts_mongoose_1.createSchema({
     _id: ts_mongoose_1.Type.string(),
     teamsId: ts_mongoose_1.Type.optionalString(),
     scopeOfWorks: ts_mongoose_1.Type.optionalString(),
@@ -54,3 +54,4 @@ var ProjectSchema = ts_mongoose_1.createSchema({
     createdAt: ts_mongoose_1.Type.date({ default: new Date(Date.now()) })
 });
 exports.Project = ts_mongoose_1.typedModel('projects', ProjectSchema);
+//# sourceMappingURL=project.models.js.map
