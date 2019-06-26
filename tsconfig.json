@@ -1,4 +1,6 @@
 {
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*"],
   "compilerOptions": {
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */
@@ -61,7 +63,7 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     "alwaysStrict": true,
     "strictNullChecks": true,
-    "outDir": "./dist",
+    "outDir": "./lib",
     "declaration": true
   }
 }
