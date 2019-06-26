@@ -7,9 +7,6 @@
   "author": "Sebastian Gug",
   "license": "All rights reserved",
   "private": false,
-  "dependencies": {
-    "ts-mongoose": "^0.0.18"
-  },
   "devDependencies": {
     "@types/mongoose": "^5.5.6",
     "mongoose": "5.4.19"
