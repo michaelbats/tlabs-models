@@ -1,9 +1,4 @@
-import {
-  createSchema,
-  Type,
-  typedModel,
-  ExtractProps
-} from 'node_modules/ts-mongoose/index';
+import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 const ExternalUserSchema = createSchema({
   _id: Type.string({ required: true }),
   signedIn: Type.boolean({ required: true, default: false }),
