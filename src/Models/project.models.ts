@@ -1,11 +1,11 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 import {
-  GoogleFileObject,
-  RequirementsObject,
-  GoogleFolderObject,
-  WorkflowObject
+  GoogleFileSchema,
+  RequirementsSchema,
+  GoogleFolderSchema,
+  WorkflowSchema
 } from './shared.models';
-import { SiteObject } from './site.models';
+import { SiteSchema } from './site.models';
 
 const ProjectSchema = createSchema({
   _id: Type.string(),
@@ -22,12 +22,12 @@ const ProjectSchema = createSchema({
   isCompleted: Type.boolean({ default: false }),
   activationDate: Type.optionalDate(),
   endDate: Type.optionalDate(),
-  latestJobsOutputReport: Type.optionalObject().of(GoogleFileObject),
+  latestJobsOutputReport: Type.optionalSchema().of(GoogleFileSchema),
   documents: Type.optionalArray().of(Type.string()),
   purchaseOrder: Type.optionalString(),
   callScript: Type.optionalString(),
   allowedWorkTypes: Type.optionalArray().of(Type.string()),
-  sites: Type.optionalArray().of(Type.object().of(SiteObject)),
+  sites: Type.optionalArray().of(Type.schema().of(SiteSchema)),
   team: Type.optionalObject().of({
     admin: Type.optionalArray().of(Type.string()),
     engineers: Type.optionalArray().of(Type.string()),
@@ -43,7 +43,7 @@ const ProjectSchema = createSchema({
       jobStatus: Type.optionalString()
     })
   ),
-  workflow: Type.optionalObject().of(WorkflowObject),
+  workflow: Type.optionalSchema().of(WorkflowSchema),
   compliance: Type.optionalObject().of({
     hasMethodStatement: Type.optionalBoolean(),
     hasScheduleOfRates: Type.optionalBoolean(),
@@ -51,9 +51,9 @@ const ProjectSchema = createSchema({
     raiseInvoice: Type.string() as 'manual' | 'automatic' | 'bulk'
   }),
   riskAssessments: Type.optionalArray().of(Type.string()),
-  requirements: Type.optionalArray().of(Type.object().of(RequirementsObject)),
-  googleFolder: Type.optionalObject().of(GoogleFolderObject),
-  files: Type.optionalArray().of(Type.object().of(GoogleFileObject)),
+  requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
+  googleFolder: Type.optionalSchema().of(GoogleFolderSchema),
+  files: Type.optionalArray().of(Type.schema().of(GoogleFileSchema)),
   sendReports: Type.optionalBoolean({ default: true }),
   tags: Type.optionalArray().of(Type.string()),
   createdBy: Type.string(),

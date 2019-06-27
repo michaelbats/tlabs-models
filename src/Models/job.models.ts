@@ -1,10 +1,10 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-import { SiteObject } from './site.models';
+import { SiteSchema } from './site.models';
 import {
-  RequirementsObject,
-  WorkflowObject,
-  SamplesObject,
-  GoogleFileObject
+  RequirementsSchema,
+  WorkflowSchema,
+  SamplesSchema,
+  GoogleFileSchema
 } from './shared.models';
 
 const WorkObject = {
@@ -30,7 +30,7 @@ const WorkObject = {
     TLtype: Type.string(),
     quoteRate: Type.number(),
     quantity: Type.number({ default: 1 }),
-    requirements: Type.optionalArray().of(Type.object().of(RequirementsObject)),
+    requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
     elements: Type.optionalArray().of(Type.string())
   }),
   completed: Type.boolean({ default: false })
@@ -57,7 +57,7 @@ const JobSchema = createSchema({
   lowerLimit: Type.optionalDate(),
   higherLimit: Type.optionalDate(),
   deletionRequestedBy: Type.optionalString(),
-  site: Type.object().of(SiteObject),
+  site: Type.schema().of(SiteSchema),
   contact: Type.object().of({
     name: Type.optionalString(),
     phone: Type.optionalString(),
@@ -71,7 +71,7 @@ const JobSchema = createSchema({
   twoMen: Type.boolean({ default: false }),
   sendReport: Type.boolean({ default: true }),
   work: Type.object().of(WorkObject),
-  requirements: Type.optionalArray().of(Type.object().of(RequirementsObject)),
+  requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
   failure: Type.optionalObject().of({
     reason: Type.string({ default: 'No Answer' }) as
       | 'No Answer'
@@ -81,9 +81,9 @@ const JobSchema = createSchema({
       | 'Callback Requested',
     notes: Type.optionalString()
   }),
-  workflow: Type.optionalObject().of(WorkflowObject),
-  samples: Type.optionalObject().of(SamplesObject),
-  files: Type.optionalArray().of(Type.object().of(GoogleFileObject)),
+  workflow: Type.optionalSchema().of(WorkflowSchema),
+  samples: Type.optionalObject().of(SamplesSchema),
+  files: Type.optionalArray().of(Type.schema().of(GoogleFileSchema)),
   reportFileIds: Type.optionalArray().of(Type.string()),
   reportDraftGenerated: Type.optionalBoolean({ default: false }),
   riskAssessments: Type.optionalArray().of(Type.string()),

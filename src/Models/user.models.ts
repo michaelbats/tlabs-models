@@ -1,5 +1,5 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-import { GoogleFileObject } from './shared.models';
+import { GoogleFileSchema } from './shared.models';
 
 const EngineerSchema = createSchema({
   homePostcode: Type.optionalString(),
@@ -45,7 +45,7 @@ const UserSchema = createSchema({
   lastname: Type.string({ required: true }),
   email: Type.string({ required: true }),
   workMobile: Type.optionalNumber(),
-  usersSignature: Type.optionalObject().of(GoogleFileObject),
+  usersSignature: Type.optionalSchema().of(GoogleFileSchema),
   jobTitle: Type.optionalString(),
   teamsId: Type.optionalString(),
   roles: Type.optionalObject(),

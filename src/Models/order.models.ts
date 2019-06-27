@@ -1,7 +1,7 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-import { SiteObject } from './site.models';
+import { SiteSchema } from './site.models';
 
-const SurveyObject = {
+const SurveySchema = createSchema({
   scheduleId: Type.string(),
   property: Type.optionalObject().of({
     type: Type.string(),
@@ -79,16 +79,15 @@ const SurveyObject = {
       })
     })
   })
-};
+});
 
-const ResidentObject = {
+const ResidentSchema = createSchema({
   isVoid: Type.string(),
   name: Type.optionalString(),
   email: Type.optionalString(),
   phone: Type.optionalString(),
   details: Type.optionalString()
-};
-const ResidentSchema = createSchema({ ResidentObject });
+});
 
 const OrderSchema = createSchema({
   _id: Type.string(),
@@ -101,9 +100,9 @@ const OrderSchema = createSchema({
   updatedAt: Type.optionalDate({ required: true }),
   createdBy: Type.optionalString({ required: true }),
   updatedBy: Type.optionalString({ required: true }),
-  site: Type.object().of(SiteObject),
-  survey: Type.optionalObject().of(SurveyObject),
-  resident: Type.optionalObject().of(ResidentObject)
+  site: Type.schema().of(SiteSchema),
+  survey: Type.optionalSchema().of(SurveySchema),
+  resident: Type.optionalSchema().of(ResidentSchema)
 });
 
 // mongoose usable schema

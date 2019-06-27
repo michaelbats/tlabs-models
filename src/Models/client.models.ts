@@ -1,9 +1,9 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-import { SiteObject } from './site.models';
+import { SiteSchema } from './site.models';
 import {
-  GoogleFileObject,
-  GoogleFolderObject,
-  ScheduleOfRatesObject
+  GoogleFileSchema,
+  GoogleFolderSchema,
+  ScheduleOfRatesSchema
 } from './shared.models';
 
 const ClientSchema = createSchema({
@@ -21,8 +21,8 @@ const ClientSchema = createSchema({
   city: Type.optionalString(),
   county: Type.optionalString(),
   createdAt: Type.optionalString(),
-  files: Type.optionalArray().of(Type.object().of(GoogleFileObject)),
-  googleFolder: Type.optionalObject().of(Type.object().of(GoogleFolderObject)),
+  files: Type.optionalSchema().of(Type.object().of(GoogleFileSchema)),
+  googleFolder: Type.optionalSchema().of(Type.object().of(GoogleFolderSchema)),
   hasOwnScheduleOfRates: Type.optionalBoolean(),
   isContractor: Type.optionalBoolean(),
   name: Type.optionalString(),
@@ -36,10 +36,10 @@ const ClientSchema = createSchema({
   }),
   sageReference: Type.optionalString(),
   scheduleOfRates: Type.optionalArray().of(
-    Type.object().of(ScheduleOfRatesObject)
+    Type.schema().of(ScheduleOfRatesSchema)
   ),
   sector: Type.optionalString(),
-  sites: Type.optionalArray().of(Type.object().of(SiteObject)),
+  sites: Type.optionalArray().of(Type.schema().of(SiteSchema)),
   tags: Type.optionalArray().of(Type.string()),
   teamsId: Type.optionalString(),
   telephone: Type.optionalString()
@@ -47,3 +47,5 @@ const ClientSchema = createSchema({
 
 export const Client = typedModel('clients', ClientSchema);
 export type IClient = ExtractProps<typeof ClientSchema>;
+
+let thing = new Client();
