@@ -7,7 +7,7 @@ import {
   GoogleFileSchema
 } from './shared.models';
 
-const WorkObject = {
+const WorkSchema = createSchema({
   likelihood: Type.string() as
     | 'Certain/Guaranteed'
     | 'Likely'
@@ -34,7 +34,7 @@ const WorkObject = {
     elements: Type.optionalArray().of(Type.string())
   }),
   completed: Type.boolean({ default: false })
-};
+});
 
 const JobSchema = createSchema({
   _id: Type.optionalObject(),
@@ -70,7 +70,7 @@ const JobSchema = createSchema({
   purchaseOrder: Type.optionalString(),
   twoMen: Type.boolean({ default: false }),
   sendReport: Type.boolean({ default: true }),
-  work: Type.object().of(WorkObject),
+  work: Type.schema().of(WorkSchema),
   requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
   failure: Type.optionalObject().of({
     reason: Type.string({ default: 'No Answer' }) as
