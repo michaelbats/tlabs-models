@@ -86,7 +86,7 @@ const ResidentObject = {
   name: Type.optionalString(),
   email: Type.optionalString(),
   phone: Type.optionalString(),
-  details: Type.optionalString
+  details: Type.optionalString()
 };
 const ResidentSchema = createSchema({ ResidentObject });
 
