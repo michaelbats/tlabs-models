@@ -1,24 +1,24 @@
 import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
 
 const ContactSchema = createSchema({
-  _id: Type.optionalString({ required: true }),
-  firstname: Type.string({ required: true }),
-  lastname: Type.string({ required: true }),
+  _id: Type.optionalString(),
+  firstname: Type.string(),
+  lastname: Type.string(),
   jobRole: Type.optionalString(),
-  email: Type.string({ required: true }),
+  email: Type.string(),
   telephone: Type.optionalArray().of(
     Type.object().of({
-      type: Type.string({ required: true }),
-      number: Type.string({ required: true })
+      type: Type.string(),
+      number: Type.string()
     })
   ),
   notes: Type.optionalString(),
-  clientId: Type.string({ required: true }),
-  ownerId: Type.string({ required: true }),
-  source: Type.string({ required: true }),
+  clientId: Type.string(),
+  ownerId: Type.string(),
+  source: Type.string(),
   status: Type.string({ default: 'active' }) as 'active' | 'inactive',
   tags: Type.optionalArray().of(Type.string()),
-  createdAt: Type.date({ requried: true, default: new Date(Date.now()) })
+  createdAt: Type.date({ default: new Date(Date.now()) })
 });
 
 export const Contact = typedModel('contacts', ContactSchema);

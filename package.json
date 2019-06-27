@@ -3,7 +3,7 @@
   "scripts": {
     "tsc": "tsc"
   },
-  "version": "1.1.27",
+  "version": "1.1.31",
   "description": "Typescript Interfaces and models for TL apps",
   "main": "dist/index.js",
   "repository": "https://github.com/michaelbats/tlabs-models.git",
@@ -13,13 +13,13 @@
   "jsnext:main": "es/index.js",
   "dependencies": {},
   "devDependencies": {
-    "ts-mongoose": "0.0.16",
+    "ts-mongoose": "^0.0.18",
     "@types/mongoose": "^5.5.6",
     "mongoose": "^5.6.1",
     "typescript": "^3.5.2"
   },
   "peerDependencies": {
-    "ts-mongoose": "0.0.16",
+    "ts-mongoose": "^0.0.18",
     "@types/mongoose": "^5.5.6",
     "mongoose": "^5.6.1",
     "typescript": "^3.5.2"
