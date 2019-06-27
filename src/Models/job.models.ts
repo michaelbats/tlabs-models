@@ -30,7 +30,7 @@ const WorkSchema = createSchema({
     TLtype: Type.string(),
     quoteRate: Type.number(),
     quantity: Type.number({ default: 1 }),
-    requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
+    // requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
     elements: Type.optionalArray().of(Type.string())
   }),
   completed: Type.boolean({ default: false })
