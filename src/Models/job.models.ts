@@ -37,7 +37,7 @@ const WorkSchema = createSchema({
 });
 
 const JobSchema = createSchema({
-  _id: Type.optionalObject(),
+  _id: Type.optionalString(),
   title: Type.string(),
   reference: Type.number(),
   batchId: Type.string(),
