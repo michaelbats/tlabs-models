@@ -1,25 +1,42 @@
-import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
+import { prop, Typegoose, ModelType, InstanceType } from 'typegoose';
 
-const ContactSchema = createSchema({
-  _id: Type.optionalString(),
-  firstname: Type.string(),
-  lastname: Type.string(),
-  jobRole: Type.optionalString(),
-  email: Type.string(),
-  telephone: Type.optionalArray().of(
-    Type.object().of({
-      type: Type.string(),
-      number: Type.string()
-    })
-  ),
-  notes: Type.optionalString(),
-  clientId: Type.string(),
-  ownerId: Type.string(),
-  source: Type.string(),
-  status: Type.string({ default: 'active' }) as 'active' | 'inactive',
-  tags: Type.optionalArray().of(Type.string()),
-  createdAt: Type.date({ default: new Date(Date.now()) })
-});
+export class Contact {
+  @prop({ required: true })
+  _id?: string;
 
-export const Contact = typedModel('contacts', ContactSchema);
-export type IContact = ExtractProps<typeof ContactSchema>;
+  @prop({ required: true })
+  firstname: string;
+
+  @prop({ required: true })
+  lastname: string;
+
+  @prop()
+  jobRole?: string;
+
+  @prop({ required: true })
+  email: string;
+
+  @prop()
+  telephone?: { type: string; number: string }[];
+
+  @prop()
+  notes?: string;
+
+  @prop({ required: true })
+  clientId: string;
+
+  @prop({ required: true })
+  ownerId: string;
+
+  @prop({ required: true })
+  source: string;
+
+  @prop({ default: 'active', enum: ['active', 'inactive'] })
+  status: 'active' | 'inactive';
+
+  @prop()
+  tags: string[];
+
+  @prop({ default: Date.now() })
+  createdAt: Date;
+}

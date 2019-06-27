@@ -3,3 +3,4 @@ coverage
 __tests__
 .gitbook
 src
+tsconfig

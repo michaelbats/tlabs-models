@@ -1,29 +1,49 @@
-import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-const ExternalUserSchema = createSchema({
-  _id: Type.string({ required: true }),
-  signedIn: Type.boolean({ required: true, default: false }),
-  clientId: Type.string({ required: true }),
-  clientName: Type.string({ required: true }),
-  googleId: Type.string({ unique: true, sparse: true }),
-  microsoftId: Type.string({ unique: true, sparse: true }),
-  email: Type.string({ required: true, unique: true }),
-  firstname: Type.string({ required: true }),
-  lastname: Type.string({ required: true }),
-  createdAt: Type.date({ required: true, default: new Date(Date.now()) }),
-  token: Type.string({ required: true }),
-  permissions: Type.object({ required: true }).of({
-    reports: Type.boolean({ required: true, default: false }),
-    orders: Type.boolean({ required: true, default: false }),
-    activityLog: Type.boolean({ required: true, default: false }),
-    admin: Type.boolean({ required: true, default: false })
+import { prop, Typegoose, ModelType, InstanceType } from 'typegoose';
+
+export class ExternalUser {
+  @prop({ required: true })
+  _id: string;
+
+  @prop({ default: false })
+  signedIn: boolean;
+
+  @prop({ required: true })
+  clientId: string;
+
+  @prop({ required: true })
+  clientName: string;
+
+  @prop({ unique: true, sparse: true })
+  googleId: string;
+
+  @prop({ unique: true, sparse: true })
+  microsoftId: string;
+
+  @prop({ required: true, unique: true })
+  email: string;
+
+  @prop({ required: true })
+  firstname: string;
+
+  @prop({ required: true })
+  lastname: string;
+
+  @prop({ required: true })
+  token: string;
+
+  @prop({ default: Date.now() })
+  createdAt: Date;
+
+  @prop({
+    default: { reports: false, orders: false, activityLog: false, admin: false }
   })
-});
-
-/** Use this to interact with the 'external_users' collection in mongodb */
-export const ExternalUser = typedModel('external_users', ExternalUserSchema);
-
-/** Interface extracted from ExternalUser with the 'Document' parts removed */
-export type IExternalUser = ExtractProps<typeof ExternalUserSchema>;
+  permissions: {
+    reports: boolean;
+    orders: boolean;
+    activityLog: boolean;
+    admin: boolean;
+  };
+}
 
 /** frontend interface of how the user object returned from the token upon authentication, to be used on frontend */
 export interface IJWTUser {
