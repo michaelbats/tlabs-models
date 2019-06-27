@@ -1,23 +1,23 @@
 {
-  "name": "@tlabs/models",
-  "scripts": {
-    "tsc": "tsc"
-  },
-  "version": "1.1.15",
-  "description": "Typescript Interfaces and models for TL apps",
-  "main": "dist/index.js",
-  "repository": "https://github.com/michaelbats/tlabs-models.git",
-  "author": "Sebastian Gug",
-  "private": false,
-  "module": "dist/es/index.js",
-  "jsnext:main": "es/index.js",
-  "types": "dist/index.d.ts",
-  "devDependencies": {
-    "@types/mongoose": "^5.5.6",
-    "mongoose": "^5.6.1",
-    "ts-mongoose": "^0.0.18"
-  },
-  "dependencies": {
-    "typescript": "^3.5.2"
-  }
+    "name": "@tlabs/models",
+    "scripts": {
+        "tsc": "tsc"
+    },
+    "version": "1.1.16",
+    "description": "Typescript Interfaces and models for TL apps",
+    "main": "dist/index.js",
+    "repository": "https://github.com/michaelbats/tlabs-models.git",
+    "author": "Sebastian Gug",
+    "private": false,
+    "module": "dist/es/index.js",
+    "jsnext:main": "es/index.js",
+    "types": "dist/index.d.ts",
+    "devDependencies": {
+        "@types/mongoose": "^5.5.6",
+        "mongoose": "^5.6.1",
+        "ts-mongoose": "0.0.16"
+    },
+    "dependencies": {
+        "typescript": "^3.5.2"
+    }
 }
