@@ -82,7 +82,7 @@ const JobSchema = createSchema({
     notes: Type.optionalString()
   }),
   workflow: Type.optionalSchema().of(WorkflowSchema),
-  samples: Type.optionalObject().of(SamplesSchema),
+  samples: Type.optionalSchema().of(SamplesSchema),
   files: Type.optionalArray().of(Type.schema().of(GoogleFileSchema)),
   reportFileIds: Type.optionalArray().of(Type.string()),
   reportDraftGenerated: Type.optionalBoolean({ default: false }),
