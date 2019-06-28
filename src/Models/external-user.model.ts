@@ -1,5 +1,18 @@
-import { prop, Typegoose, ModelType, InstanceType } from 'typegoose';
+import { prop, Typegoose, ModelType, InstanceType, Ref } from 'typegoose';
 
+class Permissions {
+  @prop({ default: false })
+  reports: boolean;
+
+  @prop({ default: false })
+  orders: boolean;
+
+  @prop({ default: false })
+  activityLog: boolean;
+
+  @prop({ default: false })
+  admin: boolean;
+}
 export class ExternalUser {
   @prop({ required: true })
   _id: string;
@@ -35,14 +48,11 @@ export class ExternalUser {
   createdAt: Date;
 
   @prop({
-    default: { reports: false, orders: false, activityLog: false, admin: false }
+    required: true,
+    ref: Permissions,
+    _id: false
   })
-  permissions: {
-    reports: boolean;
-    orders: boolean;
-    activityLog: boolean;
-    admin: boolean;
-  };
+  permissions: Ref<Permissions>;
 }
 
 /** frontend interface of how the user object returned from the token upon authentication, to be used on frontend */

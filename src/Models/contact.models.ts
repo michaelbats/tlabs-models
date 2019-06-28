@@ -1,4 +1,17 @@
-import { prop, Typegoose, ModelType, InstanceType } from 'typegoose';
+import { prop, Typegoose, ModelType, InstanceType, Ref } from 'typegoose';
+
+class Telephone {
+  @prop({ required: true })
+  type: string;
+
+  @prop({ required: true })
+  number: string;
+}
+
+enum Status {
+  Active = 'active',
+  Inactive = 'inactive'
+}
 
 export class Contact {
   @prop({ required: true })
@@ -16,8 +29,8 @@ export class Contact {
   @prop({ required: true })
   email: string;
 
-  @prop()
-  telephone?: { type: string; number: string }[];
+  @arrayProp({ itemsRef: Telephone, _id: false })
+  telephone?: Ref<Telephone>[];
 
   @prop()
   notes?: string;
@@ -31,11 +44,11 @@ export class Contact {
   @prop({ required: true })
   source: string;
 
-  @prop({ default: 'active', enum: ['active', 'inactive'] })
-  status: 'active' | 'inactive';
+  @prop({ default: 'active', enum: Object.values(Status) })
+  status: Status;
 
-  @prop()
-  tags: string[];
+  @arrayProp({ items: String })
+  tags?: string[];
 
   @prop({ default: Date.now() })
   createdAt: Date;
