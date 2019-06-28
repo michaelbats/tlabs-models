@@ -13,7 +13,7 @@ class Permissions {
   @prop({ default: false })
   admin: boolean;
 }
-export class ExternalUser {
+export class ExternalUser extends Typegoose {
   @prop({ required: true })
   _id: string;
 
