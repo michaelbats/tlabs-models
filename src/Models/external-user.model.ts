@@ -48,11 +48,14 @@ export class ExternalUser {
   createdAt: Date;
 
   @prop({
-    required: true,
-    ref: Permissions,
-    _id: false
+    default: { reports: false, orders: false, activityLog: false, admin: false }
   })
-  permissions: Ref<Permissions>;
+  permissions: {
+    reports: boolean;
+    orders: boolean;
+    activityLog: boolean;
+    admin: boolean;
+  };
 }
 
 /** frontend interface of how the user object returned from the token upon authentication, to be used on frontend */

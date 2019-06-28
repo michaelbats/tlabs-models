@@ -1,4 +1,11 @@
-import { prop, Typegoose, ModelType, InstanceType, Ref } from 'typegoose';
+import {
+  prop,
+  arrayProp,
+  Typegoose,
+  ModelType,
+  InstanceType,
+  Ref
+} from 'typegoose';
 
 class Telephone {
   @prop({ required: true })
