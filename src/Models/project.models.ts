@@ -1,64 +1,81 @@
-// import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-// import {
-//   GoogleFileSchema,
-//   RequirementsSchema,
-//   GoogleFolderSchema,
-//   WorkflowSchema
-// } from './shared.models';
-// import { SiteSchema } from './site.models';
+import { prop, Typegoose, ModelType, InstanceType, Ref, arrayProp } from 'typegoose';
 
-// const ProjectSchema = createSchema({
-//   _id: Type.string(),
-//   teamsId: Type.optionalString(),
-//   scopeOfWorks: Type.optionalString(),
-//   engineerNote: Type.optionalString(),
-//   reference: Type.optionalNumber(),
-//   sourceQuoteId: Type.optionalString(),
-//   clientId: Type.string(),
-//   clientName: Type.string(),
-//   quoteRequestedBy: Type.optionalString(),
-//   quotePreparedBy: Type.optionalString(),
-//   isActive: Type.boolean({ default: false }),
-//   isCompleted: Type.boolean({ default: false }),
-//   activationDate: Type.optionalDate(),
-//   endDate: Type.optionalDate(),
-//   latestJobsOutputReport: Type.optionalSchema().of(GoogleFileSchema),
-//   documents: Type.optionalArray().of(Type.string()),
-//   purchaseOrder: Type.optionalString(),
-//   callScript: Type.optionalString(),
-//   allowedWorkTypes: Type.optionalArray().of(Type.string()),
-//   sites: Type.optionalArray().of(Type.schema().of(SiteSchema)),
-//   team: Type.optionalObject().of({
-//     admin: Type.optionalArray().of(Type.string()),
-//     engineers: Type.optionalArray().of(Type.string()),
-//     others: Type.optionalArray().of(Type.string())
-//   }),
-//   removalContractorContactId: Type.optionalString(),
-//   contacts: Type.optionalArray().of(
-//     Type.object().of({
-//       contactId: Type.optionalString(),
-//       notes: Type.optionalString(),
-//       noAccess: Type.optionalString(),
-//       reports: Type.optionalString(),
-//       jobStatus: Type.optionalString()
-//     })
-//   ),
-//   workflow: Type.optionalSchema().of(WorkflowSchema),
-//   compliance: Type.optionalObject().of({
-//     hasMethodStatement: Type.optionalBoolean(),
-//     hasScheduleOfRates: Type.optionalBoolean(),
-//     automaticAnalysisReport: Type.string() as 'manual' | 'automatic',
-//     raiseInvoice: Type.string() as 'manual' | 'automatic' | 'bulk'
-//   }),
-//   riskAssessments: Type.optionalArray().of(Type.string()),
-//   requirements: Type.optionalArray().of(Type.schema().of(RequirementsSchema)),
-//   googleFolder: Type.optionalSchema().of(GoogleFolderSchema),
-//   files: Type.optionalArray().of(Type.schema().of(GoogleFileSchema)),
-//   sendReports: Type.optionalBoolean({ default: true }),
-//   tags: Type.optionalArray().of(Type.string()),
-//   createdBy: Type.string(),
-//   createdAt: Type.date({ default: new Date(Date.now()) })
-// });
+import { GoogleFile, GoogleFolder, Requirements, Workflow, ProjectContacts, ProjectCompliance, Team } from './shared.models';
+import { SiteSchema } from './site.models';
 
-// export const Project = typedModel('projects', ProjectSchema);
-// export type IProject = ExtractProps<typeof ProjectSchema>;
+export class ProjectSchema extends Typegoose {
+  @prop({required: true})
+  _id: string;
+  @prop({required: true})
+  clientId: string;
+  @prop({required: true})
+  clientName: string;
+  @prop({required: true})
+  createdBy: string;
+  @prop()
+  teamsId?: string;
+  @prop()
+  scopeOfWorks?: string;
+  @prop()
+  engineerNote?: string;
+  @prop()
+  sourceQuoteId?: string;
+  @prop()
+  quoteRequestedBy?: string;
+  @prop()
+  quotePreparedBy?: string;
+  @prop()
+  removalContractorContactId?: string;
+  @prop()
+  purchaseOrder?: string;
+  @prop()
+  callScript?: string;
+  @prop()
+  reference?: number;
+  @prop({default: false})
+  isActive: boolean;
+  @prop({default: false})
+  isCompleted: boolean;
+  @prop()
+  activationDate?: Date;
+  @prop()
+  endDate?: Date;
+  @prop({default: new Date(Date.now())})
+  createdAt: Date;
+  @prop({ref: GoogleFile, _id: false})
+  latestJobsOutputReport: Ref<GoogleFile>
+  @arrayProp({ items: String })
+  tags?: string[];
+  @prop()
+  sendReports?: boolean;
+  @arrayProp({ itemsRef: GoogleFile, _id: false })
+  files?: Ref<GoogleFile>[];
+  @prop({ ref: GoogleFolder, _id: false })
+  googleFolder?: Ref<GoogleFolder>;
+  @arrayProp({itemsRef: Requirements, _id: false})
+  requirements?: Ref<Requirements>[];
+  @arrayProp({ items: String })
+  riskAssessments?: string[]
+  @prop({ref: Workflow, _id: false})
+  workflow?: Ref<Workflow>;
+	@arrayProp({ itemsRef: SiteSchema, _id: false })
+  sites: Ref<SiteSchema>[];
+  @arrayProp({ items: String })
+  allowedWorkTypes?: string[];
+  @arrayProp({ items: String })
+  documents?: string[];
+  @arrayProp({itemsRef: ProjectContacts, _id: false})
+  contacts?: Ref<ProjectContacts>[];
+  @prop({ref: ProjectCompliance, _id: false})
+  compliance?: Ref<ProjectCompliance>;
+  @prop({ref: Team})
+  team?: Ref<Team>
+}
+
+export const Project = new ProjectSchema().getModelForClass(ProjectSchema, {
+	schemaOptions: { collection: 'projects' }
+});
+export type IProject = InstanceType<ProjectSchema>
+
+let thing: IProject;
+thing.

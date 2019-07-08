@@ -99,6 +99,50 @@ enum QAIssueType {
 	Other = 'Other'
 }
 
+export class ProjectContacts {
+	@prop()
+	contactId?: string;
+	@prop()
+	notes?: string;
+	@prop()
+	noAccess?: string;
+	@prop()
+	reports?: string;
+	@prop()
+	jobStatus?: string;
+}
+
+enum RaiseInvoice {
+	Manual = 'manual',
+	Automatic = 'automatic',
+	Bulk = 'bulk'
+}
+
+enum AutomaticAnalysisReport {
+	Manual = 'manual',
+	Automatic = 'automatic'
+}
+
+export class ProjectCompliance {
+	@prop()
+	hasMethodStatement?: boolean;
+	@prop()
+	hasScheduleOfRates?: boolean;
+	@prop({ enum: Object.keys(AutomaticAnalysisReport) })
+	automaticAnalysisReport?: AutomaticAnalysisReport;
+	@prop({ enum: Object.keys(RaiseInvoice) })
+	raiseInvoice?: RaiseInvoice;
+}
+
+export class Team {
+	@arrayProp({ items: String })
+	admin?: string[];
+	@arrayProp({ items: String })
+	engineers?: string[];
+	@arrayProp({ items: String })
+	others?: string[];
+}
+
 export class Samples {
 	@prop()
 	quantity?: number;

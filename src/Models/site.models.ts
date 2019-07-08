@@ -41,4 +41,6 @@ export class SiteSchema extends Typegoose {
 	teamsId?: string;
 }
 
-export const Site = new SiteSchema().getModelForClass(SiteSchema);
+export const Site = new SiteSchema().getModelForClass(SiteSchema, {
+	schemaOptions: { collection: 'sites' }
+});
