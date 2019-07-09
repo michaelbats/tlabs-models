@@ -10,11 +10,13 @@ yarn add @tlabs/models
 
 ## Built With
 
-- [ts-mongoose](https://www.npmjs.com/package/ts-mongoose) - Used to generate types + mongoose schemas as a singleton.
+-   [Typegoose](https://www.npmjs.com/package/typegoose) - Used to generate types + mongoose schemas as a singleton via decorators;
+
+We initially built it with ts-mongoose but it kept breaking.
 
 ## Authors
 
-- **Sebastian Gug** - _All work_ - [SebastianGug](https://github.com/michaelbats)
+-   **Sebastian Gug** - _All work_ - [SebastianGug](https://github.com/michaelbats)
 
 ## License
 
