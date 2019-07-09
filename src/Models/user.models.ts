@@ -1,70 +1,94 @@
-// import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-// import { GoogleFileSchema } from './shared.models';
+import { prop, Typegoose, Ref, arrayProp } from 'typegoose';
+import { ScheduleOfRates, GoogleFile, GoogleFolder } from './shared.models';
+import { Site, SiteSchema } from './site.models';
 
-// const EngineerSchema = createSchema({
-//   homePostcode: Type.optionalString(),
-//   ratePerHour: Type.optionalNumber(),
-//   workingHours: Type.optionalObject().of({
-//     monday: Type.object().of({
-//       start: Type.string({ required: true }),
-//       end: Type.string({ required: true })
-//     }),
-//     tuesday: Type.object().of({
-//       start: Type.string({ required: true }),
-//       end: Type.string({ required: true })
-//     }),
-//     wednesday: Type.object().of({
-//       start: Type.string({ required: true }),
-//       end: Type.string({ required: true })
-//     }),
-//     thursday: Type.object().of({
-//       start: Type.string({ required: true }),
-//       end: Type.string({ required: true })
-//     }),
-//     friday: Type.object().of({
-//       start: Type.string({ required: true }),
-//       end: Type.string({ required: true })
-//     }),
-//     saturday: Type.object().of({
-//       start: Type.string({ required: true }),
-//       end: Type.string({ required: true })
-//     }),
-//     sunday: Type.object().of({
-//       start: Type.string({ required: true }),
-//       end: Type.string({ required: true })
-//     })
-//   }),
-//   safetyEquipment: Type.optionalArray().of(Type.string()),
-//   skills: Type.optionalArray().of(Type.string()),
-//   inductedSites: Type.optionalArray().of(Type.string())
-// });
+export class WorkingDay {
+    @prop({ required: true })
+    start: string;
+    @prop({ required: true })
+    end: string;
+}
 
-// const UserSchema = createSchema({
-//   _id: Type.string({ required: true }),
-//   firstname: Type.string({ required: true }),
-//   lastname: Type.string({ required: true }),
-//   email: Type.string({ required: true }),
-//   workMobile: Type.optionalNumber(),
-//   usersSignature: Type.optionalSchema().of(GoogleFileSchema),
-//   jobTitle: Type.optionalString(),
-//   teamsId: Type.optionalString(),
-//   roles: Type.optionalObject(),
-//   disabled: Type.boolean({ required: true, default: false }),
-//   permissions: Type.optionalObject(),
-//   pinColour: Type.optionalString(),
-//   createdAt: Type.optionalDate({
-//     required: true,
-//     default: new Date(Date.now())
-//   }),
-//   engineerAttributes: Type.optionalSchema().of(EngineerSchema),
-//   settings: Type.optionalObject().of({
-//     globalCalendar: Type.optionalObject().of({
-//       maxTime: Type.optionalString(),
-//       minTime: Type.optionalString()
-//     })
-//   }),
-//   tags: Type.optionalArray().of(Type.string())
-// });
+export class WorkingHours {
+    @prop({ ref: WorkingDay, _id: false })
+    monday: Ref<WorkingDay>;
+    @prop({ ref: WorkingDay, _id: false })
+    tuesday: Ref<WorkingDay>;
+    @prop({ ref: WorkingDay, _id: false })
+    wednesday: Ref<WorkingDay>;
+    @prop({ ref: WorkingDay, _id: false })
+    thursday: Ref<WorkingDay>;
+    @prop({ ref: WorkingDay, _id: false })
+    friday: Ref<WorkingDay>;
+    @prop({ ref: WorkingDay, _id: false })
+    saturday: Ref<WorkingDay>;
+    @prop({ ref: WorkingDay, _id: false })
+    sunday: Ref<WorkingDay>;
+}
 
-// export const User = typedModel('users', UserSchema);
-// export type IUser = ExtractProps<typeof UserSchema>;
+export class Engineer {
+    @prop()
+    homePostcode?: string;
+    @prop()
+    ratePerHour?: number;
+    @prop({ ref: WorkingHours, _id: false })
+    workingHours: Ref<WorkingHours>;
+    @arrayProp({ items: String })
+    safetyEquipment?: string[];
+    @arrayProp({ items: String })
+    skills?: string[];
+    @arrayProp({ items: String })
+    inductedSites?: string[];
+}
+
+export class GlobalCalendar {
+    @prop()
+    maxTime?: string;
+    @prop()
+    minTime?: string;
+}
+
+export class Settings {
+    @prop({ ref: GlobalCalendar, _id: false })
+    globalCalendar?: Ref<GlobalCalendar>;
+}
+
+export class UserSchema extends Typegoose {
+    @prop({ required: true })
+    _id: string;
+    @prop({ required: true })
+    firstname: string;
+    @prop({ required: true })
+    lastname: string;
+    @prop({ required: true })
+    email: string;
+    @prop()
+    pinColour?: string;
+    @prop()
+    jobTitle?: string;
+    @prop()
+    teamsId?: string;
+    @prop({ default: new Date(Date.now()) })
+    createdAt: Date;
+    @arrayProp({ items: String })
+    tags?: string[];
+    @prop({ ref: Settings, _id: false })
+    settings?: Ref<Settings>;
+    @prop({ ref: Engineer, _id: false })
+    engineerAttributes?: Ref<Engineer>;
+    @prop()
+    permissions?: object;
+    @prop({ default: false })
+    disabled: boolean;
+    @prop()
+    roles?: object;
+    @prop()
+    workMobile?: number;
+    @prop({ ref: GoogleFile, _id: false })
+    usersSignature?: Ref<GoogleFile>;
+}
+
+export const User = new UserSchema().getModelForClass(UserSchema, {
+    schemaOptions: { collection: 'users' }
+});
+export type IUser = UserSchema;
