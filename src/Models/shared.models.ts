@@ -37,6 +37,8 @@ export class Element {
 	reference: number;
 }
 
+export type IElement = Element;
+
 class StepsType {
 	@prop()
 	action?: string;
@@ -172,6 +174,8 @@ export class Samples {
 	teamsReport?: string;
 }
 
+export type ISamples = Samples;
+
 export class ScheduleOfRates {
 	@prop({ required: true })
 	_id: string;
@@ -206,3 +210,5 @@ export class ScheduleOfRates {
 	@prop()
 	reference?: number;
 }
+
+export type IScheduleOfRates = ScheduleOfRates;

@@ -62,6 +62,8 @@ export const ExternalUser = new ExternalUserSchema().getModelForClass(ExternalUs
 	schemaOptions: { collection: 'external_users' }
 });
 
+export type IExternalUser = ExternalUserSchema;
+
 /** frontend interface of how the user object returned from the token upon authentication, to be used on frontend */
 export interface IJWTUser {
 	_id: string;
