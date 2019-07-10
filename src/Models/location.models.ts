@@ -1,43 +1,53 @@
-// import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
+import { prop, arrayProp, Ref, Typegoose } from 'typegoose';
 
-// // GEOMETRY
-// const Geometry = createSchema({
-//   type: Type.string({ required: true }),
-//   coordinates: Type.array({ required: true }).of(Type.number()) as [
-//     number,
-//     number
-//   ]
-// });
+export class Geometry {
+	@prop({ required: true })
+	type: string;
+	@arrayProp({ items: Number, required: true })
+	coordinates: [number, number];
+}
 
-// // PROPERTIES
-// const Properties = createSchema({
-//   UPRN: Type.optionalString(),
-//   clientId: Type.optionalString(),
-//   clientName: Type.optionalString(),
-//   addressLine1: Type.optionalString(),
-//   postcode: Type.optionalString()
-// });
+export class Properties {
+	@prop()
+	UPRN?: string;
+	@prop()
+	clientId?: string;
+	@prop()
+	clientName?: string;
+	@prop()
+	addressLine1?: string;
+	@prop()
+	postcode?: string;
+}
 
-// // LOCATIONS COLLECTION MONGOOSE SCHEMA
-// const LocationsSchema = createSchema({
-//   _id: Type.string({ required: true }),
-//   type: Type.string({ required: true }),
-//   geometry: Type.schema().of(Geometry),
-//   properties: Type.schema().of(Properties),
-//   modifiedBy: Type.string({ required: true }),
-//   modifiedAt: Type.date({ default: new Date(Date.now()) })
-// });
+export class LocationsSchema extends Typegoose {
+	@prop({ required: true })
+	_id: string;
+	@prop({ required: true })
+	type: string;
+	@prop({ ref: Geometry, _id: false })
+	geometry: Ref<Geometry>;
+	@prop({ ref: Properties, _id: false })
+	properties: Ref<Properties>;
+	@prop({ default: new Date(Date.now()) })
+	modifiedAt: Date;
+	@prop({ required: true })
+	modifiedBy: string;
+}
 
-// // ALL EXPORTS:
-// // MAIN EXPORT
-// export const Locations = typedModel('locations', LocationsSchema);
-// export type ILocations = ExtractProps<typeof LocationsSchema>;
-// // SECONDARY STUFF
-// export type IGeometry = ExtractProps<typeof Geometry>;
-// export type IProperties = ExtractProps<typeof Properties>;
-// export interface IGeoJson {
-//   type: string;
-//   geometry: IGeometry;
-//   properties?: IProperties;
-//   $key?: string;
-// }
+// ALL EXPORTS:
+// MAIN EXPORT
+export const Locations = new LocationsSchema().getModelForClass(LocationsSchema, {
+	schemaOptions: { collection: 'locations' }
+});
+
+export type ILocations = LocationsSchema;
+// SECONDARY STUFF
+export type IGeometry = Geometry;
+export type IProperties = Properties;
+export interface IGeoJson {
+	type: string;
+	geometry: IGeometry;
+	properties?: IProperties;
+	$key?: string;
+}
