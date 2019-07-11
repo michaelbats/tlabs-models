@@ -16,12 +16,12 @@
 		"@types/mongoose": "^5.5.6",
 		"mongoose": "^5.6.1",
 		"typegoose": "^5.7.2",
-		"typescript": "^3.5.2"
+		"typescript": "^3.4.3"
 	},
 	"peerDependencies": {
 		"@types/mongoose": "^5.5.6",
 		"mongoose": "^5.6.1",
 		"typegoose": "^5.7.2",
-		"typescript": "^3.5.2"
+		"typescript": "^3.4.3"
 	}
 }
