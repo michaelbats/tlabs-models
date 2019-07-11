@@ -1,37 +1,72 @@
-// import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
+import { prop, Typegoose, arrayProp } from 'typegoose';
 
-// const BookingSchema = createSchema({
-//   _id: Type.optionalString({ required: true }),
-//   jobId: Type.optionalString(),
-//   jobName: Type.optionalString(),
-//   batchId: Type.optionalString(),
-//   batchName: Type.optionalString(),
-//   projectId: Type.optionalString(),
-//   projectName: Type.optionalString(),
-//   clientId: Type.optionalString(),
-//   clientName: Type.optionalString(),
-//   teamsId: Type.optionalString(),
-//   engineerId: Type.optionalString(),
-//   isAVO: Type.optionalBoolean(),
-//   startDate: Type.optionalDate(),
-//   endDate: Type.optionalDate(),
-//   isNotModifiable: Type.optionalBoolean(),
-//   isLockedToEngineer: Type.optionalBoolean(),
-//   actualStart: Type.optionalDate(),
-//   actualEnd: Type.optionalDate(),
-//   notes: Type.optionalString(),
-//   status: Type.optionalString(),
-//   statusDate: Type.optionalDate(),
-//   ended: Type.optionalBoolean(),
-//   workCompleted: Type.optionalBoolean(),
-//   elementCompleted: Type.optionalArray().of(Type.string()),
-//   imageId: Type.optionalString(),
-//   confirmationCode: Type.optionalString(),
-//   confirmationCodeReason: Type.optionalString(),
-//   feedback: Type.optionalString(),
-//   createdBy: Type.optionalString(),
-//   createdAt: Type.optionalDate()
-// });
+export class BookingSchema extends Typegoose {
+	@prop({ required: true })
+	_id?: string;
+	@prop()
+	jobId?: string;
+	@prop()
+	jobName?: string;
+	@prop()
+	batchId?: string;
+	@prop()
+	batchName?: string;
+	@prop()
+	projectId?: string;
+	@prop()
+	projectName?: string;
+	@prop()
+	clientId?: string;
+	@prop()
+	clientName?: string;
+	@prop()
+	teamsId?: string;
+	@prop()
+	engineerId?: string;
+	@prop()
+	notes?: string;
+	@prop()
+	status?: string;
+	@prop()
+	imageId?: string;
+	@prop()
+	confirmationCode?: string;
+	@prop()
+	confirmationCodeReason?: string;
+	@prop()
+	feedback?: string;
+	@prop()
+	isAVO?: boolean;
+	@prop()
+	startDate?: Date;
+	@prop()
+	endDate?: Date;
+	@prop()
+	isNotModifiable?: boolean;
+	@prop()
+	isLockedToEngineer?: boolean;
+	@prop()
+	actualStart?: Date;
+	@prop()
+	actualEnd?: Date;
+	@prop()
+	statusDate?: Date;
+	@prop()
+	ended?: boolean;
+	@prop()
+	workCompleted?: boolean;
+	@prop({ required: true })
+	createdBy?: string;
+	@prop({ default: new Date(Date.now()) })
+	createdAt?: Date;
+	@arrayProp({ items: String })
+	elementCompleted?: string[];
+}
 
-// export const Booking = typedModel('bookings', BookingSchema);
-// export type IBooking = ExtractProps<typeof BookingSchema>;
+export const Booking = new BookingSchema().getModelForClass(BookingSchema, {
+	schemaOptions: {
+		collection: 'bookings'
+	}
+});
+
+export type IBooking = BookingSchema;

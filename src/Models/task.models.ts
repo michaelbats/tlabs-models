@@ -1,46 +1,82 @@
-// import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
+import { prop, Typegoose, Ref, arrayProp } from 'typegoose';
 
-// const NextTaskSchema = createSchema({
-//   _id: Type.optionalString(),
-//   title: Type.string({ required: true }),
-//   details: Type.optionalString(),
-//   dueDate: Type.optionalDate(),
-//   higherLimit: Type.optionalDate(),
-//   lowerLimit: Type.optionalDate(),
-//   assigneeIds: Type.optionalArray().of(Type.string()),
-//   nextTask: Type.optionalObject()
-// });
+export class NextTask {
+	@prop({ required: true })
+	_id?: string;
+	@prop({ required: true })
+	title: string;
+	@prop()
+	details?: string;
+	@prop()
+	dueDate?: Date;
+	@prop()
+	higherLimit?: Date;
+	@prop()
+	lowerLimit?: Date;
+	@arrayProp({ items: String })
+	assigneeIds?: string[];
+	@prop({ ref: NextTask, _id: false })
+	nextTask?: Ref<NextTask>;
+}
 
-// const TaskSchema = createSchema({
-//   _id: Type.optionalString({ required: true }),
-//   title: Type.string({ required: true }),
-//   complete: Type.boolean({ required: true, default: false }),
-//   completedAt: Type.optionalDate(),
-//   assigneeIds: Type.optionalArray().of(Type.string()),
-//   groupAssigneeId: Type.optionalString(),
-//   details: Type.optionalString(),
-//   dueDate: Type.date({ required: true }),
-//   lowerLimit: Type.optionalDate(),
-//   higherLimit: Type.optionalDate(),
-//   raisedBy: Type.optionalString({ required: true }),
-//   relatedCollection: Type.string({ required: true }) as
-//     | 'clients'
-//     | 'contacts'
-//     | 'jobs'
-//     | 'leads'
-//     | 'personal'
-//     | 'projects'
-//     | 'quotes'
-//     | 'sites',
-//   relatedId: Type.string({ required: true }),
-//   relatedStage: Type.optionalString(),
-//   relatedStep: Type.optionalNumber(),
-//   relatedStepAction: Type.optionalString(),
-//   nextTask: Type.optionalSchema().of(NextTaskSchema),
-//   dismissedAlert: Type.optionalBoolean({ default: false }),
-//   tags: Type.optionalArray().of(Type.string()),
-//   createdAt: Type.date({ default: new Date(Date.now()) })
-// });
+export enum RelatedCollection {
+	Clients = 'clients',
+	Contacts = 'contacts',
+	Jobs = 'jobs',
+	Leads = 'leads',
+	Personal = 'personal',
+	Projects = 'projects',
+	Quotes = 'quotes',
+	Sites = 'sites'
+}
 
-// export const Task = typedModel('tasks', TaskSchema);
-// export type ITask = ExtractProps<typeof TaskSchema>;
+export class TaskSchema extends Typegoose {
+	@prop({ required: true })
+	_id?: string;
+	@prop({ required: true })
+	title: string;
+	@prop({ default: false })
+	complete: boolean;
+	@prop()
+	completedAt?: Date;
+	@arrayProp({ items: String })
+	assigneeIds?: string[];
+	@prop()
+	groupAssigneeId?: string;
+	@prop()
+	details?: string;
+	@prop({ required: true })
+	dueDate: Date;
+	@prop()
+	lowerLimit?: Date;
+	@prop()
+	higherLimit?: Date;
+	@prop({ required: true })
+	raisedBy?: string;
+	@prop({ enum: Object.values(RelatedCollection) })
+	relatedCollection?: RelatedCollection;
+	@prop({ required: true })
+	relatedId: string;
+	@prop()
+	relatedStage?: string;
+	@prop()
+	relatedStep?: number;
+	@prop()
+	relatedStepAction?: string;
+	@prop({ ref: NextTask, _id: false })
+	nextTask: Ref<NextTask>;
+	@prop({ default: false })
+	dismissedAlert?: boolean;
+	@arrayProp({ items: String })
+	tags?: string[];
+	@prop({ default: new Date(Date.now()) })
+	createdAt?: Date;
+}
+
+export type ITask = TaskSchema;
+export type INextTask = NextTask;
+export const Task = new TaskSchema().getModelForClass(TaskSchema, {
+	schemaOptions: {
+		collection: 'tasks'
+	}
+});

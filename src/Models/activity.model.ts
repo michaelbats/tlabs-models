@@ -1,28 +1,35 @@
-// import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
+import { prop, Ref, arrayProp, Typegoose } from 'typegoose';
+import { RelatedCollection } from '../models/task.models';
+enum Type {
+	Email = 'email',
+	Note = 'note',
+	Call = 'call',
+	Update = 'update',
+	Meeting = 'meeting'
+}
 
-// const ActivitySchema = createSchema({
-//   _id: Type.optionalString({ required: true }),
-//   title: Type.string({ required: true }),
-//   details: Type.string({ required: true }),
-//   type: Type.string({ required: true, default: 'note' }) as
-//     | 'email'
-//     | 'note'
-//     | 'call'
-//     | 'update'
-//     | 'meeting',
-//   createdBy: Type.string({ required: true }),
-//   relatedId: Type.string({ required: true }),
-//   relatedCollection: Type.string({ required: true }) as
-//     | 'clients'
-//     | 'contacts'
-//     | 'jobs'
-//     | 'leads'
-//     | 'personal'
-//     | 'projects'
-//     | 'quotes'
-//     | 'sites',
-//   createdAt: Type.date({ default: new Date(Date.now()) })
-// });
+class ActivitySchema extends Typegoose {
+	@prop({ required: true })
+	_id?: string;
+	@prop({ required: true })
+	title: string;
+	@prop({ required: true })
+	details: string;
+	@prop({ enum: Object.values(Type) })
+	type: Type;
+	@prop({ required: true })
+	createdBy: string;
+	@prop({ required: true })
+	relatedId: string;
+	@prop({ enum: Object.values(RelatedCollection) })
+	relatedCollection: RelatedCollection;
+	@prop({ default: new Date(Date.now()) })
+	createdAt?: Date;
+}
 
-// export const Activity = typedModel('activities', ActivitySchema);
-// export type IActivity = ExtractProps<typeof ActivitySchema>;
+export type IActivity = ActivitySchema;
+export const Activity = new ActivitySchema().getModelForClass(ActivitySchema, {
+	schemaOptions: {
+		collection: 'activities'
+	}
+});

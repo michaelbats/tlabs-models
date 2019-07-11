@@ -1,4 +1,4 @@
-import { prop, Typegoose } from 'typegoose';
+import { prop, Typegoose, Ref } from 'typegoose';
 
 class Permissions {
 	@prop({ default: false })
@@ -48,14 +48,10 @@ export class ExternalUserSchema extends Typegoose {
 	createdAt: Date;
 
 	@prop({
-		default: { reports: false, orders: false, activityLog: false, admin: false }
+		ref: Permissions,
+		_id: false
 	})
-	permissions: {
-		reports: boolean;
-		orders: boolean;
-		activityLog: boolean;
-		admin: boolean;
-	};
+	permissions: Ref<Permissions>;
 }
 
 export const ExternalUser = new ExternalUserSchema().getModelForClass(ExternalUserSchema, {
@@ -63,6 +59,7 @@ export const ExternalUser = new ExternalUserSchema().getModelForClass(ExternalUs
 });
 
 export type IExternalUser = ExternalUserSchema;
+export type IPermissions = Permissions;
 
 /** frontend interface of how the user object returned from the token upon authentication, to be used on frontend */
 export interface IJWTUser {

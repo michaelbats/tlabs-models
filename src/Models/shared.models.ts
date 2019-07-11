@@ -130,9 +130,9 @@ export class ProjectCompliance {
 	hasMethodStatement?: boolean;
 	@prop()
 	hasScheduleOfRates?: boolean;
-	@prop({ enum: Object.keys(AutomaticAnalysisReport) })
+	@prop({ enum: Object.values(AutomaticAnalysisReport) })
 	automaticAnalysisReport?: AutomaticAnalysisReport;
-	@prop({ enum: Object.keys(RaiseInvoice) })
+	@prop({ enum: Object.values(RaiseInvoice) })
 	raiseInvoice?: RaiseInvoice;
 }
 
