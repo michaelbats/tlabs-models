@@ -33,5 +33,3 @@ export const Activity = new ActivitySchema().getModelForClass(ActivitySchema, {
 		collection: 'activities'
 	}
 });
-
-let act: IActivity;

@@ -11,6 +11,13 @@ export class GoogleFile {
 	hideFromEngineer: boolean;
 }
 
+export const GoogleFileExample: GoogleFile = {
+	fileId: 'string',
+	fileName: 'string',
+	fileUrl: 'string',
+	hideFromEngineer: false
+};
+
 export class GoogleFolder {
 	@prop({ required: true })
 	id: string;
@@ -19,6 +26,12 @@ export class GoogleFolder {
 	@prop({ required: true })
 	url: string;
 }
+
+export const GoogleFolderExample: GoogleFolder = {
+	id: 'string',
+	name: 'string',
+	url: 'string'
+};
 
 export class Element {
 	@prop({ required: true })
@@ -37,7 +50,15 @@ export class Element {
 	reference: number;
 }
 
-export type IElement = Element;
+export const ElementExample: Element = {
+	_id: 'string',
+	name: 'string',
+	description: 'string',
+	duration: 12345,
+	price: 12345,
+	priceWeekend: 12345,
+	reference: 12345
+};
 
 class StepsType {
 	@prop()
@@ -50,19 +71,37 @@ class StepsType {
 	associatedRole?: string;
 }
 
+export const StepsTypeExample: StepsType = {
+	action: 'string',
+	percentage: 12345,
+	delay: 12345,
+	associatedRole: 'string'
+};
+
 class Steps {
 	@prop({ ref: StepsType, _id: false })
-	type: Ref<StepsType>;
+	type: StepsType;
+	@prop()
 	label?: string;
 }
+
+export const StepsExample: Steps = {
+	type: StepsTypeExample,
+	label: 'string'
+};
 
 export class WorkflowSteps {
 	@prop()
 	numberOfDays?: number;
 
 	@arrayProp({ itemsRef: Steps, _id: false })
-	steps: Ref<Steps>[];
+	steps: Steps[];
 }
+
+export const WorkflowStepsExample: WorkflowSteps = {
+	numberOfDays: 12345,
+	steps: [StepsExample, StepsExample, StepsExample]
+};
 
 export class Requirements {
 	@prop({ required: true })
@@ -75,14 +114,27 @@ export class Requirements {
 	externalCost: number;
 }
 
+export const RequirementsExample: Requirements = {
+	reqId: 'string',
+	quantity: 12345,
+	clientCost: 12345,
+	externalCost: 12345
+};
+
 export class Workflow {
 	@arrayProp({ itemsRef: WorkflowSteps, _id: false })
-	presite?: Ref<WorkflowSteps>[];
+	presite?: WorkflowSteps[];
 	@arrayProp({ itemsRef: WorkflowSteps, _id: false })
-	site?: Ref<WorkflowSteps>[];
+	site?: WorkflowSteps[];
 	@arrayProp({ itemsRef: WorkflowSteps, _id: false })
-	postsite?: Ref<WorkflowSteps>[];
+	postsite?: WorkflowSteps[];
 }
+
+export const WorkflowExample: Workflow = {
+	presite: [WorkflowStepsExample, WorkflowStepsExample],
+	site: [WorkflowStepsExample, WorkflowStepsExample],
+	postsite: [WorkflowStepsExample, WorkflowStepsExample]
+};
 
 enum QAActions {
 	UrgentAttentionRequired = 'Urgent Attention Required',
@@ -114,6 +166,14 @@ export class ProjectContacts {
 	jobStatus?: string;
 }
 
+export const ProjectContactsExample: ProjectContacts = {
+	contactId: 'string',
+	notes: 'string',
+	noAccess: 'string',
+	reports: 'string',
+	jobStatus: 'string'
+};
+
 enum RaiseInvoice {
 	Manual = 'manual',
 	Automatic = 'automatic',
@@ -136,6 +196,13 @@ export class ProjectCompliance {
 	raiseInvoice?: RaiseInvoice;
 }
 
+export const ProjectComplianceExample: ProjectCompliance = {
+	hasMethodStatement: false,
+	hasScheduleOfRates: false,
+	automaticAnalysisReport: AutomaticAnalysisReport.Automatic,
+	raiseInvoice: RaiseInvoice.Automatic
+};
+
 export class Team {
 	@arrayProp({ items: String })
 	admin?: string[];
@@ -144,6 +211,12 @@ export class Team {
 	@arrayProp({ items: String })
 	others?: string[];
 }
+
+export const TeamExample: Team = {
+	admin: ['string1', 'string2', 'string3'],
+	engineers: ['string1', 'string2', 'string3'],
+	others: ['string1', 'string2', 'string3']
+};
 
 export class Samples {
 	@prop()
@@ -157,13 +230,13 @@ export class Samples {
 	@prop()
 	isUrgentReason?: string;
 	@prop()
-	analysisStartTime?: Date;
+	analysisStartTime?: string;
 	@prop()
-	analysisEndTime?: Date;
+	analysisEndTime?: string;
 	@prop()
-	qaStartTime?: Date;
+	qaStartTime?: string;
 	@prop()
-	qaEndTime?: Date;
+	qaEndTime?: string;
 	@prop({ enum: Object.values(QAActions) })
 	qaAction?: QAActions;
 	@prop()
@@ -174,7 +247,21 @@ export class Samples {
 	teamsReport?: string;
 }
 
-export type ISamples = Samples;
+export const SamplesExample: Samples = {
+	quantity: 12345,
+	trackingCode: 'string',
+	isUrgent: false,
+	isUrgentContact: 'string',
+	isUrgentReason: 'string',
+	analysisStartTime: new Date(Date.now()).toISOString(),
+	analysisEndTime: new Date(Date.now()).toISOString(),
+	qaStartTime: new Date(Date.now()).toISOString(),
+	qaEndTime: new Date(Date.now()).toISOString(),
+	qaAction: QAActions.ActionRequired,
+	qaIssues: false,
+	qaIssueType: QAIssueType.AdminIssues,
+	teamsReport: 'string'
+};
 
 export class ScheduleOfRates {
 	@prop({ required: true })
@@ -182,7 +269,7 @@ export class ScheduleOfRates {
 	@prop({ required: true })
 	title: string;
 	@prop()
-	normalHourse?: number;
+	normalHours?: number;
 	@prop()
 	weekend?: number;
 	@prop()
@@ -211,4 +298,20 @@ export class ScheduleOfRates {
 	reference?: number;
 }
 
-export type IScheduleOfRates = ScheduleOfRates;
+export const ScheduleOfRatesExample: ScheduleOfRates = {
+	_id: 'string',
+	title: 'string',
+	normalHours: 12345,
+	weekend: 12345,
+	duration: 12345,
+	internalProcedure: 'string',
+	description: 'string',
+	reqSkills: ['string1', 'string2', 'string3'],
+	teamsAppointmentType: 'string',
+	teamsPropertyType: 'string',
+	teamsDistanceBand: 'string',
+	numberOfPumps: 12345,
+	teamsAirTestType: 'string',
+	elements: ['string1', 'string2', 'string3'],
+	reference: 12345
+};

@@ -1,5 +1,14 @@
-import { SiteSchema } from './site.models';
-import { Requirements, Workflow, Samples, GoogleFile } from './shared.models';
+import { SiteSchema, SiteDocExample, ISite } from './site.models';
+import {
+	Requirements,
+	Workflow,
+	Samples,
+	GoogleFile,
+	RequirementsExample,
+	SamplesExample,
+	GoogleFileExample,
+	WorkflowExample
+} from './shared.models';
 import { prop, Ref, arrayProp, Typegoose } from 'typegoose';
 
 export class JobContact {
@@ -19,6 +28,14 @@ export class JobContact {
 	email?: string;
 }
 
+export const JobContactExample: JobContact = {
+	name: 'string',
+	phone: 'string',
+	mobile: 'string',
+	alternative: 'string',
+	email: 'string'
+};
+
 enum Reason {
 	NoAnswer = 'No Answer',
 	CallRejectedByContact = 'Call Rejected By Contact',
@@ -37,6 +54,11 @@ export class Failure {
 	notes?: string;
 }
 
+export const FailureExample: Failure = {
+	reason: Reason.NoAnswer,
+	notes: 'string'
+};
+
 export class WorkType {
 	@prop({ required: true })
 	TLtype: string;
@@ -49,6 +71,14 @@ export class WorkType {
 	@arrayProp({ items: String, _id: false })
 	elements?: string[];
 }
+
+export const WorkTypeExample: WorkType = {
+	TLtype: 'string',
+	quoteRate: 12345,
+	quantity: 12345,
+	requirements: [],
+	elements: ['element1ID', 'element2ID', 'element3ID']
+};
 
 enum Likelihood {
 	CertainGuaranteed = 'Certain/Guaranteed',
@@ -63,9 +93,9 @@ export class Work {
 	@prop()
 	nextAvailableSlot?: boolean;
 	@prop()
-	start?: Date;
+	start?: string;
 	@prop()
-	end?: Date;
+	end?: string;
 	@prop()
 	assignedOperatives?: number;
 	@arrayProp({ items: String })
@@ -87,10 +117,29 @@ export class Work {
 	@prop()
 	notes?: string;
 	@prop({ ref: WorkType })
-	workType: Ref<WorkType>;
+	workType: WorkType;
 	@prop({ required: true })
 	completed: boolean;
 }
+
+export const WorkExample: Work = {
+	likelihood: Likelihood.CertainGuaranteed,
+	nextAvailableSlot: false,
+	start: 'string',
+	end: 'string',
+	assignedOperatives: 12345,
+	preferredStaff: ['string1', 'string2', 'string3'],
+	staffArray: [{ key1: 'test1', key2: 'test1' }, { key1: 'test2', key2: 'test2' }],
+	tlProjectManager: 'string',
+	tlAdminContact: 'string',
+	clientProjectManager: 'string',
+	clientSiteContact: 'string',
+	projectManagerTel: 'string',
+	siteContactTel: 'string',
+	notes: 'string',
+	workType: WorkTypeExample,
+	completed: false
+};
 
 enum Status {
 	NotBooked = 'Not Booked',
@@ -126,15 +175,15 @@ export class JobSchema extends Typegoose {
 	@prop()
 	onHoldDetails?: string;
 	@prop()
-	onHoldDate?: Date;
+	onHoldDate?: string;
 	@prop()
-	lowerLimit?: Date;
+	lowerLimit?: string;
 	@prop()
-	higherLimit?: Date;
+	higherLimit?: string;
 	@prop()
 	deletionRequestedBy?: string;
 	@prop({ ref: SiteSchema, _id: false })
-	site: Ref<SiteSchema>;
+	site: ISite;
 	@prop({ ref: JobContact, _id: false })
 	contact: Ref<JobContact>;
 	@prop()
@@ -150,15 +199,15 @@ export class JobSchema extends Typegoose {
 	@prop({ required: true })
 	work: Ref<Work>;
 	@arrayProp({ itemsRef: Requirements, _id: false })
-	requirements?: Ref<Requirements>[];
+	requirements?: Requirements[];
 	@prop({ ref: Failure, _id: false })
-	failure?: Ref<Failure>;
+	failure?: Failure;
 	@prop({ ref: Workflow, _id: false })
-	workflow?: Ref<Workflow>;
+	workflow?: Workflow;
 	@prop({ ref: Samples, _id: false })
-	samples?: Ref<Samples>;
+	samples?: Samples;
 	@arrayProp({ itemsRef: GoogleFile, _id: false })
-	files: Ref<GoogleFile>[];
+	files: GoogleFile[];
 	@arrayProp({ items: String })
 	reportFileIds?: string[];
 	@prop()
@@ -170,11 +219,50 @@ export class JobSchema extends Typegoose {
 	@prop({ required: true })
 	createdBy: string;
 	@prop({ required: true })
-	createdAt: Date;
+	createdAt: string;
 }
 
 export const Job = new JobSchema().getModelForClass(JobSchema, {
 	schemaOptions: { collection: 'jobs' }
 });
 
-export type IJob = JobSchema;
+export type IJob = Omit<JobSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
+
+export const JobDocExample: IJob = {
+	_id: 'string',
+	title: 'string',
+	reference: 12345,
+	batchId: 'string',
+	batchName: 'string',
+	projectId: 'string',
+	projectName: 'string',
+	clientId: 'string',
+	clientName: 'string',
+	status: Status.Booked,
+	isOnHold: false,
+	onHoldReason: 'string',
+	onHoldDetails: 'string',
+	onHoldDate: new Date(Date.now()).toISOString(),
+	lowerLimit: new Date(Date.now()).toISOString(),
+	higherLimit: new Date(Date.now()).toISOString(),
+	deletionRequestedBy: 'user ID',
+	site: SiteDocExample,
+	contact: JobContactExample,
+	notes: 'string',
+	engineerNote: 'string',
+	purchaseOrder: 'string',
+	twoMen: false,
+	sendReport: true,
+	work: WorkExample,
+	requirements: [RequirementsExample, RequirementsExample],
+	failure: FailureExample,
+	workflow: WorkflowExample,
+	samples: SamplesExample,
+	files: [GoogleFileExample, GoogleFileExample],
+	reportFileIds: ['string1', 'string2', 'string3'],
+	reportDraftGenerated: false,
+	riskAssessments: ['string1', 'string2', 'string3'],
+	tags: ['string1', 'string2', 'string3'],
+	createdBy: 'string',
+	createdAt: new Date(Date.now()).toISOString()
+};
