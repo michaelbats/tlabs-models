@@ -1,6 +1,6 @@
 import { prop, Typegoose } from 'typegoose';
 import { RelatedCollection } from './task.models';
-import { Without } from 'src';
+import { Without } from './shared.models';
 enum Type {
 	Email = 'email',
 	Note = 'note',

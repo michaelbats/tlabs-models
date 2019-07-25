@@ -1,5 +1,5 @@
 import { prop, Typegoose, Ref, arrayProp } from 'typegoose';
-import { Without } from 'src';
+import { Without } from './shared.models';
 
 export class NextTask {
 	@prop({ required: true })
