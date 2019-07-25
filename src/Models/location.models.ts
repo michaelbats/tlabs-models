@@ -7,6 +7,11 @@ export class Geometry {
 	coordinates: [number, number];
 }
 
+export const GeometryExample: Geometry = {
+	type: 'string',
+	coordinates: [12345, 12345]
+};
+
 export class Properties {
 	@prop()
 	UPRN?: string;
@@ -20,17 +25,25 @@ export class Properties {
 	postcode?: string;
 }
 
+export const PropertiesExample: Properties = {
+	UPRN: 'string',
+	clientId: 'string',
+	clientName: 'string',
+	addressLine1: 'string',
+	postcode: 'string'
+};
+
 export class LocationsSchema extends Typegoose {
 	@prop({ required: true })
 	_id: string;
 	@prop({ required: true })
 	type: string;
 	@prop({ ref: Geometry, _id: false })
-	geometry: Ref<Geometry>;
+	geometry: Geometry;
 	@prop({ ref: Properties, _id: false })
-	properties: Ref<Properties>;
+	properties: Properties;
 	@prop({ default: new Date(Date.now()) })
-	modifiedAt: Date;
+	modifiedAt: string;
 	@prop({ required: true })
 	modifiedBy: string;
 }
@@ -41,13 +54,30 @@ export const Locations = new LocationsSchema().getModelForClass(LocationsSchema,
 	schemaOptions: { collection: 'locations' }
 });
 
-export type ILocations = LocationsSchema;
+export type ILocations = Omit<
+	LocationsSchema,
+	'getModelForClass' | 'setModelForClass' | 'buildSchema'
+>;
 // SECONDARY STUFF
-export type IGeometry = Geometry;
-export type IProperties = Properties;
 export interface IGeoJson {
 	type: string;
-	geometry: IGeometry;
-	properties?: IProperties;
+	geometry: Geometry;
+	properties?: Properties;
 	$key?: string;
 }
+
+export const GeoJsonExample: IGeoJson = {
+	type: 'string',
+	geometry: GeometryExample,
+	properties: PropertiesExample,
+	$key: 'string'
+};
+
+export const LocationsDocExample: ILocations = {
+	_id: 'string',
+	type: 'string',
+	geometry: GeometryExample,
+	properties: PropertiesExample,
+	modifiedAt: new Date(Date.now()).toISOString(),
+	modifiedBy: 'string'
+};

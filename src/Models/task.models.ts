@@ -8,16 +8,27 @@ export class NextTask {
 	@prop()
 	details?: string;
 	@prop()
-	dueDate?: Date;
+	dueDate?: string;
 	@prop()
-	higherLimit?: Date;
+	higherLimit?: string;
 	@prop()
-	lowerLimit?: Date;
+	lowerLimit?: string;
 	@arrayProp({ items: String })
 	assigneeIds?: string[];
 	@prop({ ref: NextTask, _id: false })
-	nextTask?: Ref<NextTask>;
+	nextTask?: NextTask;
 }
+
+export const NextTaskExample: NextTask = {
+	_id: 'string',
+	title: 'string',
+	details: 'string',
+	dueDate: new Date(Date.now()).toISOString(),
+	higherLimit: new Date(Date.now()).toISOString(),
+	lowerLimit: new Date(Date.now()).toISOString(),
+	assigneeIds: ['string1', 'string2', 'string3'],
+	nextTask: undefined
+};
 
 export enum RelatedCollection {
 	Clients = 'clients',
@@ -38,7 +49,7 @@ export class TaskSchema extends Typegoose {
 	@prop({ default: false })
 	complete: boolean;
 	@prop()
-	completedAt?: Date;
+	completedAt?: string;
 	@arrayProp({ items: String })
 	assigneeIds?: string[];
 	@prop()
@@ -46,11 +57,11 @@ export class TaskSchema extends Typegoose {
 	@prop()
 	details?: string;
 	@prop({ required: true })
-	dueDate: Date;
+	dueDate: string;
 	@prop()
-	lowerLimit?: Date;
+	lowerLimit?: string;
 	@prop()
-	higherLimit?: Date;
+	higherLimit?: string;
 	@prop({ required: true })
 	raisedBy?: string;
 	@prop({ enum: Object.values(RelatedCollection) })
@@ -64,19 +75,40 @@ export class TaskSchema extends Typegoose {
 	@prop()
 	relatedStepAction?: string;
 	@prop({ ref: NextTask, _id: false })
-	nextTask: Ref<NextTask>;
+	nextTask: NextTask;
 	@prop({ default: false })
 	dismissedAlert?: boolean;
 	@arrayProp({ items: String })
 	tags?: string[];
 	@prop({ default: new Date(Date.now()) })
-	createdAt?: Date;
+	createdAt?: string;
 }
 
-export type ITask = TaskSchema;
-export type INextTask = NextTask;
+export type ITask = Omit<TaskSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
 export const Task = new TaskSchema().getModelForClass(TaskSchema, {
 	schemaOptions: {
 		collection: 'tasks'
 	}
 });
+
+export const TaskDocExample: ITask = {
+	_id: 'string',
+	title: 'string',
+	complete: false,
+	completedAt: new Date(Date.now()).toISOString(),
+	assigneeIds: ['string1', 'string2', 'string3'],
+	details: 'string',
+	dueDate: new Date(Date.now()).toISOString(),
+	lowerLimit: new Date(Date.now()).toISOString(),
+	higherLimit: new Date(Date.now()).toISOString(),
+	raisedBy: 'string',
+	relatedCollection: RelatedCollection.Clients,
+	relatedId: 'string',
+	relatedStage: 'string',
+	relatedStep: 12345,
+	relatedStepAction: 'string',
+	nextTask: NextTaskExample,
+	dismissedAlert: false,
+	tags: ['string1', 'string2', 'string3'],
+	createdAt: new Date(Date.now()).toISOString()
+};

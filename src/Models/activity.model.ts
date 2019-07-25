@@ -1,5 +1,5 @@
-import { prop, Ref, arrayProp, Typegoose } from 'typegoose';
-import { RelatedCollection } from '../models/task.models';
+import { prop, Typegoose } from 'typegoose';
+import { RelatedCollection } from './task.models';
 enum Type {
 	Email = 'email',
 	Note = 'note',
@@ -24,12 +24,26 @@ class ActivitySchema extends Typegoose {
 	@prop({ enum: Object.values(RelatedCollection) })
 	relatedCollection: RelatedCollection;
 	@prop({ default: new Date(Date.now()) })
-	createdAt?: Date;
+	createdAt?: string;
 }
 
-export type IActivity = ActivitySchema;
+export type IActivity = Omit<
+	ActivitySchema,
+	'getModelForClass' | 'setModelForClass' | 'buildSchema'
+>;
 export const Activity = new ActivitySchema().getModelForClass(ActivitySchema, {
 	schemaOptions: {
 		collection: 'activities'
 	}
 });
+
+export const ActivityDocExample: IActivity = {
+	_id: 'string',
+	title: 'string',
+	details: 'string',
+	type: Type.Call,
+	createdBy: 'string',
+	createdAt: new Date(Date.now()).toISOString(),
+	relatedId: 'string',
+	relatedCollection: RelatedCollection.Clients
+};

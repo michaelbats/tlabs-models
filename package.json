@@ -1,9 +1,10 @@
 {
 	"name": "@tlabs/models",
 	"scripts": {
-		"tsc": "tsc"
+		"tsc": "tsc",
+		"build": "bash scripts/build.sh"
 	},
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"description": "Typescript Interfaces and models for TL apps",
 	"main": "dist/index.js",
 	"repository": "https://github.com/michaelbats/tlabs-models.git",
