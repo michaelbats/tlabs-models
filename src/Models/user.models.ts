@@ -1,5 +1,5 @@
 import { prop, Typegoose, Ref, arrayProp } from 'typegoose';
-import { GoogleFile, GoogleFileExample, Without } from './shared.models';
+import { GoogleFile, Without } from './shared.models';
 
 export class WorkingDay {
 	@prop({ required: true })
@@ -7,11 +7,6 @@ export class WorkingDay {
 	@prop({ required: true })
 	end: string;
 }
-
-export const WorkingDayExample: WorkingDay = {
-	start: 'string',
-	end: 'string'
-};
 
 export class WorkingHours {
 	@prop({ ref: WorkingDay, _id: false })
@@ -30,16 +25,6 @@ export class WorkingHours {
 	sunday: Ref<WorkingDay>;
 }
 
-export const WorkingHoursExample: WorkingHours = {
-	monday: WorkingDayExample,
-	tuesday: WorkingDayExample,
-	wednesday: WorkingDayExample,
-	thursday: WorkingDayExample,
-	friday: WorkingDayExample,
-	saturday: WorkingDayExample,
-	sunday: WorkingDayExample
-};
-
 export class Engineer {
 	@prop()
 	homePostcode?: string;
@@ -55,15 +40,6 @@ export class Engineer {
 	inductedSites?: string[];
 }
 
-export const EngineerExample: Engineer = {
-	homePostcode: 'string',
-	ratePerHour: 12345,
-	workingHours: WorkingHoursExample,
-	safetyEquipment: ['string1', 'string2', 'string3'],
-	skills: ['string1', 'string2', 'string3'],
-	inductedSites: ['string1', 'string2', 'string3']
-};
-
 export class GlobalCalendar {
 	@prop()
 	maxTime?: string;
@@ -71,19 +47,10 @@ export class GlobalCalendar {
 	minTime?: string;
 }
 
-export const GlobalCalendarExample: GlobalCalendar = {
-	maxTime: 'string',
-	minTime: 'string'
-};
-
 export class Settings {
 	@prop({ ref: GlobalCalendar, _id: false })
 	globalCalendar?: Ref<GlobalCalendar>;
 }
-
-export const SettingsExample: Settings = {
-	globalCalendar: GlobalCalendarExample
-};
 
 export class UserSchema extends Typegoose {
 	@prop({ required: true })
@@ -124,22 +91,3 @@ export const User = new UserSchema().getModelForClass(UserSchema, {
 	schemaOptions: { collection: 'users' }
 });
 export type IUser = Without<UserSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
-
-export const UserDocExample: IUser = {
-	_id: 'string',
-	firstname: 'string',
-	lastname: 'string',
-	email: 'string',
-	pinColour: 'string',
-	jobTitle: 'string',
-	teamsId: 'string',
-	createdAt: new Date(Date.now()).toISOString(),
-	tags: ['string1', 'string2', 'string3'],
-	settings: SettingsExample,
-	engineerAttributes: EngineerExample,
-	permissions: { key1: 'string', key2: 'string' },
-	disabled: false,
-	roles: { key1: 'string', key2: 'string' },
-	workMobile: 12345,
-	usersSignature: GoogleFileExample
-};

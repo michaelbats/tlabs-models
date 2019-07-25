@@ -12,3 +12,4 @@ export * from './models/project.models';
 // export * from './models/system.models';
 export * from './models/task.models';
 export * from './models/activity.model';
+export * from './examples';

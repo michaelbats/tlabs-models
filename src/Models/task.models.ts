@@ -20,17 +20,6 @@ export class NextTask {
 	nextTask?: NextTask;
 }
 
-export const NextTaskExample: NextTask = {
-	_id: 'string',
-	title: 'string',
-	details: 'string',
-	dueDate: new Date(Date.now()).toISOString(),
-	higherLimit: new Date(Date.now()).toISOString(),
-	lowerLimit: new Date(Date.now()).toISOString(),
-	assigneeIds: ['string1', 'string2', 'string3'],
-	nextTask: undefined
-};
-
 export enum RelatedCollection {
 	Clients = 'clients',
 	Contacts = 'contacts',
@@ -91,25 +80,3 @@ export const Task = new TaskSchema().getModelForClass(TaskSchema, {
 		collection: 'tasks'
 	}
 });
-
-export const TaskDocExample: ITask = {
-	_id: 'string',
-	title: 'string',
-	complete: false,
-	completedAt: new Date(Date.now()).toISOString(),
-	assigneeIds: ['string1', 'string2', 'string3'],
-	details: 'string',
-	dueDate: new Date(Date.now()).toISOString(),
-	lowerLimit: new Date(Date.now()).toISOString(),
-	higherLimit: new Date(Date.now()).toISOString(),
-	raisedBy: 'string',
-	relatedCollection: RelatedCollection.Clients,
-	relatedId: 'string',
-	relatedStage: 'string',
-	relatedStep: 12345,
-	relatedStepAction: 'string',
-	nextTask: NextTaskExample,
-	dismissedAlert: false,
-	tags: ['string1', 'string2', 'string3'],
-	createdAt: new Date(Date.now()).toISOString()
-};

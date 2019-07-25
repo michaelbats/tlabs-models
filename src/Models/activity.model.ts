@@ -1,7 +1,7 @@
 import { prop, Typegoose } from 'typegoose';
 import { RelatedCollection } from './task.models';
 import { Without } from './shared.models';
-enum Type {
+export enum ActivityType {
 	Email = 'email',
 	Note = 'note',
 	Call = 'call',
@@ -16,8 +16,8 @@ class ActivitySchema extends Typegoose {
 	title: string;
 	@prop({ required: true })
 	details: string;
-	@prop({ enum: Object.values(Type) })
-	type: Type;
+	@prop({ enum: Object.values(ActivityType) })
+	type: ActivityType;
 	@prop({ required: true })
 	createdBy: string;
 	@prop({ required: true })
@@ -37,14 +37,3 @@ export const Activity = new ActivitySchema().getModelForClass(ActivitySchema, {
 		collection: 'activities'
 	}
 });
-
-export const ActivityDocExample: IActivity = {
-	_id: 'string',
-	title: 'string',
-	details: 'string',
-	type: Type.Call,
-	createdBy: 'string',
-	createdAt: new Date(Date.now()).toISOString(),
-	relatedId: 'string',
-	relatedCollection: RelatedCollection.Clients
-};

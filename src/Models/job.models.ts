@@ -1,15 +1,5 @@
-import { SiteSchema, SiteDocExample, ISite } from './site.models';
-import {
-	Requirements,
-	Workflow,
-	Samples,
-	GoogleFile,
-	RequirementsExample,
-	SamplesExample,
-	GoogleFileExample,
-	WorkflowExample,
-	Without
-} from './shared.models';
+import { SiteSchema, ISite } from './site.models';
+import { Requirements, Workflow, Samples, GoogleFile, Without } from './shared.models';
 import { prop, Ref, arrayProp, Typegoose } from 'typegoose';
 
 export class JobContact {
@@ -29,15 +19,7 @@ export class JobContact {
 	email?: string;
 }
 
-export const JobContactExample = {
-	name: 'string',
-	phone: 'string',
-	mobile: 'string',
-	alternative: 'string',
-	email: 'string'
-};
-
-enum Reason {
+export enum Reason {
 	NoAnswer = 'No Answer',
 	CallRejectedByContact = 'Call Rejected By Contact',
 	WrongNumber = 'Wrong Number',
@@ -55,11 +37,6 @@ export class Failure {
 	notes?: string;
 }
 
-export const FailureExample = {
-	reason: Reason.NoAnswer,
-	notes: 'string'
-};
-
 export class WorkType {
 	@prop({ required: true })
 	TLtype: string;
@@ -73,15 +50,7 @@ export class WorkType {
 	elements?: string[];
 }
 
-export const WorkTypeExample = {
-	TLtype: 'string',
-	quoteRate: 12345,
-	quantity: 12345,
-	requirements: [],
-	elements: ['element1ID', 'element2ID', 'element3ID']
-};
-
-enum Likelihood {
+export enum Likelihood {
 	CertainGuaranteed = 'Certain/Guaranteed',
 	Likely = 'Likely',
 	Possible = 'Possible',
@@ -123,26 +92,7 @@ export class Work {
 	completed: boolean;
 }
 
-export const WorkExample = {
-	likelihood: Likelihood.CertainGuaranteed,
-	nextAvailableSlot: false,
-	start: 'string',
-	end: 'string',
-	assignedOperatives: 12345,
-	preferredStaff: ['string1', 'string2', 'string3'],
-	staffArray: [{ key1: 'test1', key2: 'test1' }, { key1: 'test2', key2: 'test2' }],
-	tlProjectManager: 'string',
-	tlAdminContact: 'string',
-	clientProjectManager: 'string',
-	clientSiteContact: 'string',
-	projectManagerTel: 'string',
-	siteContactTel: 'string',
-	notes: 'string',
-	workType: WorkTypeExample,
-	completed: false
-};
-
-enum Status {
+export enum Status {
 	NotBooked = 'Not Booked',
 	Booked = 'Booked',
 	Finished = 'Finished'
@@ -186,7 +136,7 @@ export class JobSchema extends Typegoose {
 	@prop({ ref: SiteSchema, _id: false })
 	site: ISite;
 	@prop({ ref: JobContact, _id: false })
-	contact: JobContact;
+	contact: Ref<JobContact>;
 	@prop()
 	notes?: string;
 	@prop()
@@ -198,13 +148,13 @@ export class JobSchema extends Typegoose {
 	@prop({ required: true })
 	sendReport: boolean;
 	@prop({ required: true })
-	work: Work;
+	work: Ref<Work>;
 	@arrayProp({ itemsRef: Requirements, _id: false })
 	requirements?: Requirements[];
 	@prop({ ref: Failure, _id: false })
 	failure?: Failure;
-	@prop()
-	workflow?: any; //Workflow;
+	@prop({ ref: Workflow, _id: false })
+	workflow?: Workflow;
 	@prop({ ref: Samples, _id: false })
 	samples?: Samples;
 	@arrayProp({ itemsRef: GoogleFile, _id: false })
@@ -228,42 +178,3 @@ export const Job = new JobSchema().getModelForClass(JobSchema, {
 });
 
 export type IJob = Without<JobSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
-
-export const JobDocExample = {
-	_id: 'string',
-	title: 'string',
-	reference: 12345,
-	batchId: 'string',
-	batchName: 'string',
-	projectId: 'string',
-	projectName: 'string',
-	clientId: 'string',
-	clientName: 'string',
-	status: Status.Booked,
-	isOnHold: false,
-	onHoldReason: 'string',
-	onHoldDetails: 'string',
-	onHoldDate: new Date(Date.now()).toISOString(),
-	lowerLimit: new Date(Date.now()).toISOString(),
-	higherLimit: new Date(Date.now()).toISOString(),
-	deletionRequestedBy: 'user ID',
-	site: SiteDocExample,
-	contact: JobContactExample,
-	notes: 'string',
-	engineerNote: 'string',
-	purchaseOrder: 'string',
-	twoMen: false,
-	sendReport: true,
-	work: WorkExample,
-	requirements: [RequirementsExample, RequirementsExample],
-	failure: FailureExample,
-	workflow: WorkflowExample,
-	samples: SamplesExample,
-	files: [GoogleFileExample, GoogleFileExample],
-	reportFileIds: ['string1', 'string2', 'string3'],
-	reportDraftGenerated: false,
-	riskAssessments: ['string1', 'string2', 'string3'],
-	tags: ['string1', 'string2', 'string3'],
-	createdBy: 'string',
-	createdAt: new Date(Date.now()).toISOString()
-};
