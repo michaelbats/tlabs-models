@@ -137,7 +137,7 @@ export const WorkflowExample = {
 	postsite: [WorkflowStepsExample, WorkflowStepsExample]
 };
 
-enum QAActions {
+export enum QAActions {
 	UrgentAttentionRequired = 'Urgent Attention Required',
 	RepairEncapsulate = 'Repair/Encapsulate',
 	ActionRequired = 'Action Required',
@@ -147,7 +147,7 @@ enum QAActions {
 	NoSuspectMaterialIdnetified = 'No suspect material identified'
 }
 
-enum QAIssueType {
+export enum QAIssueType {
 	LabIssues = 'Lab Issues',
 	SurveyorIssues = 'Surveyor Issues',
 	AdminIssues = 'Admin Issues',
