@@ -1,6 +1,7 @@
 import { SiteSchema, ISite } from './site.models';
 import { Requirements, Workflow, Samples, GoogleFile, Without } from './shared.models';
 import { prop, Ref, arrayProp, Typegoose } from 'typegoose';
+import { Reason, Likelihood, Status } from '../enums';
 
 export class JobContact {
 	@prop()
@@ -17,14 +18,6 @@ export class JobContact {
 
 	@prop()
 	email?: string;
-}
-
-export enum Reason {
-	NoAnswer = 'No Answer',
-	CallRejectedByContact = 'Call Rejected By Contact',
-	WrongNumber = 'Wrong Number',
-	ContactUnavailable = 'Contact Unavailable',
-	CallbackRequested = 'Callback Requested'
 }
 
 export class Failure {
@@ -48,13 +41,6 @@ export class WorkType {
 	requirements?: Requirements[];
 	@arrayProp({ items: String, _id: false })
 	elements?: string[];
-}
-
-export enum Likelihood {
-	CertainGuaranteed = 'Certain/Guaranteed',
-	Likely = 'Likely',
-	Possible = 'Possible',
-	Unlikely = 'Unlikely'
 }
 
 export class Work {
@@ -90,12 +76,6 @@ export class Work {
 	workType: WorkType;
 	@prop({ required: true })
 	completed: boolean;
-}
-
-export enum Status {
-	NotBooked = 'Not Booked',
-	Booked = 'Booked',
-	Finished = 'Finished'
 }
 
 export class JobSchema extends Typegoose {

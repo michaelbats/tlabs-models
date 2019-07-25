@@ -1,4 +1,5 @@
 import { prop, arrayProp } from 'typegoose';
+import { QAActions, QAIssueType, RaiseInvoice, AutomaticAnalysisReport } from '../enums';
 
 export type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -85,23 +86,6 @@ export class Workflow {
 	postsite?: WorkflowSteps[];
 }
 
-export enum QAActions {
-	UrgentAttentionRequired = 'Urgent Attention Required',
-	RepairEncapsulate = 'Repair/Encapsulate',
-	ActionRequired = 'Action Required',
-	RemovalRecommended = 'Removal Recommended',
-	MaterialToBeManagedAsAsbestos = 'Material to be managed as asbestos',
-	NoAsbestosDetected = 'No asbestos detected',
-	NoSuspectMaterialIdnetified = 'No suspect material identified'
-}
-
-export enum QAIssueType {
-	LabIssues = 'Lab Issues',
-	SurveyorIssues = 'Surveyor Issues',
-	AdminIssues = 'Admin Issues',
-	Other = 'Other'
-}
-
 export class ProjectContacts {
 	@prop()
 	contactId?: string;
@@ -113,17 +97,6 @@ export class ProjectContacts {
 	reports?: string;
 	@prop()
 	jobStatus?: string;
-}
-
-export enum RaiseInvoice {
-	Manual = 'manual',
-	Automatic = 'automatic',
-	Bulk = 'bulk'
-}
-
-export enum AutomaticAnalysisReport {
-	Manual = 'manual',
-	Automatic = 'automatic'
 }
 
 export class ProjectCompliance {

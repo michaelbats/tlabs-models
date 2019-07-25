@@ -1,13 +1,6 @@
 import { prop, Typegoose } from 'typegoose';
-import { RelatedCollection } from './task.models';
 import { Without } from './shared.models';
-export enum ActivityType {
-	Email = 'email',
-	Note = 'note',
-	Call = 'call',
-	Update = 'update',
-	Meeting = 'meeting'
-}
+import { RelatedCollection, ActivityType } from '../enums';
 
 class ActivitySchema extends Typegoose {
 	@prop({ required: true })

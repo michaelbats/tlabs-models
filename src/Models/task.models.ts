@@ -1,5 +1,6 @@
 import { prop, Typegoose, Ref, arrayProp } from 'typegoose';
 import { Without } from './shared.models';
+import { RelatedCollection } from '../enums';
 
 export class NextTask {
 	@prop({ required: true })
@@ -18,17 +19,6 @@ export class NextTask {
 	assigneeIds?: string[];
 	@prop({ ref: NextTask, _id: false })
 	nextTask?: NextTask;
-}
-
-export enum RelatedCollection {
-	Clients = 'clients',
-	Contacts = 'contacts',
-	Jobs = 'jobs',
-	Leads = 'leads',
-	Personal = 'personal',
-	Projects = 'projects',
-	Quotes = 'quotes',
-	Sites = 'sites'
 }
 
 export class TaskSchema extends Typegoose {

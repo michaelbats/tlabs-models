@@ -10,24 +10,11 @@ import {
 	GoogleFile,
 	ProjectContacts,
 	ProjectCompliance,
-	AutomaticAnalysisReport,
-	RaiseInvoice,
 	Samples,
-	QAActions,
-	QAIssueType,
 	Team,
 	ScheduleOfRates
 } from './models/shared.models';
-import {
-	JobContact,
-	Failure,
-	Reason,
-	WorkType,
-	Work,
-	Likelihood,
-	IJob,
-	Status
-} from './models/job.models';
+import { JobContact, Failure, WorkType, Work, IJob } from './models/job.models';
 import {
 	IUser,
 	Engineer,
@@ -37,8 +24,19 @@ import {
 	Settings
 } from './models/user.models';
 
-import { NextTask, RelatedCollection, ITask } from './models/task.models';
-import { ActivityType, IActivity } from './models/activity.model';
+import { NextTask, ITask } from './models/task.models';
+import { IActivity } from './models/activity.model';
+import {
+	AutomaticAnalysisReport,
+	RaiseInvoice,
+	QAActions,
+	QAIssueType,
+	Reason,
+	Likelihood,
+	Status,
+	RelatedCollection,
+	ActivityType
+} from './enums';
 
 export const SiteDocExample: ISite = {
 	_id: 'string',
