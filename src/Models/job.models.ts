@@ -29,7 +29,7 @@ export class JobContact {
 	email?: string;
 }
 
-export const JobContactExample: JobContact = {
+export const JobContactExample = {
 	name: 'string',
 	phone: 'string',
 	mobile: 'string',
@@ -55,7 +55,7 @@ export class Failure {
 	notes?: string;
 }
 
-export const FailureExample: Failure = {
+export const FailureExample = {
 	reason: Reason.NoAnswer,
 	notes: 'string'
 };
@@ -73,7 +73,7 @@ export class WorkType {
 	elements?: string[];
 }
 
-export const WorkTypeExample: WorkType = {
+export const WorkTypeExample = {
 	TLtype: 'string',
 	quoteRate: 12345,
 	quantity: 12345,
@@ -123,7 +123,7 @@ export class Work {
 	completed: boolean;
 }
 
-export const WorkExample: Work = {
+export const WorkExample = {
 	likelihood: Likelihood.CertainGuaranteed,
 	nextAvailableSlot: false,
 	start: 'string',
@@ -203,8 +203,8 @@ export class JobSchema extends Typegoose {
 	requirements?: Requirements[];
 	@prop({ ref: Failure, _id: false })
 	failure?: Failure;
-	@prop({ ref: Workflow, _id: false })
-	workflow?: Workflow;
+	@prop()
+	workflow?: any; //Workflow;
 	@prop({ ref: Samples, _id: false })
 	samples?: Samples;
 	@arrayProp({ itemsRef: GoogleFile, _id: false })
@@ -229,7 +229,7 @@ export const Job = new JobSchema().getModelForClass(JobSchema, {
 
 export type IJob = Without<JobSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
 
-export const JobDocExample: IJob = {
+export const JobDocExample = {
 	_id: 'string',
 	title: 'string',
 	reference: 12345,

@@ -12,7 +12,7 @@ export class GoogleFile {
 	hideFromEngineer: boolean;
 }
 
-export const GoogleFileExample: GoogleFile = {
+export const GoogleFileExample = {
 	fileId: 'string',
 	fileName: 'string',
 	fileUrl: 'string',
@@ -28,7 +28,7 @@ export class GoogleFolder {
 	url: string;
 }
 
-export const GoogleFolderExample: GoogleFolder = {
+export const GoogleFolderExample = {
 	id: 'string',
 	name: 'string',
 	url: 'string'
@@ -51,7 +51,7 @@ export class Element {
 	reference: number;
 }
 
-export const ElementExample: Element = {
+export const ElementExample = {
 	_id: 'string',
 	name: 'string',
 	description: 'string',
@@ -72,7 +72,7 @@ class StepsType {
 	associatedRole?: string;
 }
 
-export const StepsTypeExample: StepsType = {
+export const StepsTypeExample = {
 	action: 'string',
 	percentage: 12345,
 	delay: 12345,
@@ -86,7 +86,7 @@ class Steps {
 	label?: string;
 }
 
-export const StepsExample: Steps = {
+export const StepsExample = {
 	type: StepsTypeExample,
 	label: 'string'
 };
@@ -99,7 +99,7 @@ export class WorkflowSteps {
 	steps: Steps[];
 }
 
-export const WorkflowStepsExample: WorkflowSteps = {
+export const WorkflowStepsExample = {
 	numberOfDays: 12345,
 	steps: [StepsExample, StepsExample, StepsExample]
 };
@@ -115,7 +115,7 @@ export class Requirements {
 	externalCost: number;
 }
 
-export const RequirementsExample: Requirements = {
+export const RequirementsExample = {
 	reqId: 'string',
 	quantity: 12345,
 	clientCost: 12345,
@@ -131,7 +131,7 @@ export class Workflow {
 	postsite?: WorkflowSteps[];
 }
 
-export const WorkflowExample: Workflow = {
+export const WorkflowExample = {
 	presite: [WorkflowStepsExample, WorkflowStepsExample],
 	site: [WorkflowStepsExample, WorkflowStepsExample],
 	postsite: [WorkflowStepsExample, WorkflowStepsExample]
@@ -167,7 +167,7 @@ export class ProjectContacts {
 	jobStatus?: string;
 }
 
-export const ProjectContactsExample: ProjectContacts = {
+export const ProjectContactsExample = {
 	contactId: 'string',
 	notes: 'string',
 	noAccess: 'string',
@@ -197,7 +197,7 @@ export class ProjectCompliance {
 	raiseInvoice?: RaiseInvoice;
 }
 
-export const ProjectComplianceExample: ProjectCompliance = {
+export const ProjectComplianceExample = {
 	hasMethodStatement: false,
 	hasScheduleOfRates: false,
 	automaticAnalysisReport: AutomaticAnalysisReport.Automatic,
@@ -213,7 +213,7 @@ export class Team {
 	others?: string[];
 }
 
-export const TeamExample: Team = {
+export const TeamExample = {
 	admin: ['string1', 'string2', 'string3'],
 	engineers: ['string1', 'string2', 'string3'],
 	others: ['string1', 'string2', 'string3']
@@ -248,7 +248,7 @@ export class Samples {
 	teamsReport?: string;
 }
 
-export const SamplesExample: Samples = {
+export const SamplesExample = {
 	quantity: 12345,
 	trackingCode: 'string',
 	isUrgent: false,
@@ -299,7 +299,7 @@ export class ScheduleOfRates {
 	reference?: number;
 }
 
-export const ScheduleOfRatesExample: ScheduleOfRates = {
+export const ScheduleOfRatesExample = {
 	_id: 'string',
 	title: 'string',
 	normalHours: 12345,
