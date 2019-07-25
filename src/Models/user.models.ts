@@ -1,5 +1,5 @@
 import { prop, Typegoose, Ref, arrayProp } from 'typegoose';
-import { GoogleFile, GoogleFileExample } from './shared.models';
+import { GoogleFile, GoogleFileExample, Without } from './shared.models';
 
 export class WorkingDay {
 	@prop({ required: true })
@@ -123,7 +123,7 @@ export class UserSchema extends Typegoose {
 export const User = new UserSchema().getModelForClass(UserSchema, {
 	schemaOptions: { collection: 'users' }
 });
-export type IUser = Omit<UserSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
+export type IUser = Without<UserSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
 
 export const UserDocExample: IUser = {
 	_id: 'string',

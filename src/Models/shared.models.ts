@@ -1,4 +1,5 @@
 import { prop, Ref, arrayProp } from 'typegoose';
+export type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export class GoogleFile {
 	@prop({ required: true })

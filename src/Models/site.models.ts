@@ -1,4 +1,5 @@
 import { prop, Typegoose, ModelType, InstanceType } from 'typegoose';
+import { Without } from './shared.models';
 
 export class SiteSchema extends Typegoose {
 	@prop({ required: true })
@@ -45,7 +46,7 @@ export const Site = new SiteSchema().getModelForClass(SiteSchema, {
 	schemaOptions: { collection: 'sites' }
 });
 
-export type ISite = Omit<SiteSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
+export type ISite = Without<SiteSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
 
 export const SiteDocExample: ISite = {
 	_id: 'string',

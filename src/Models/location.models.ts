@@ -1,4 +1,5 @@
 import { prop, arrayProp, Ref, Typegoose } from 'typegoose';
+import { Without } from './shared.models';
 
 export class Geometry {
 	@prop({ required: true })
@@ -54,7 +55,7 @@ export const Locations = new LocationsSchema().getModelForClass(LocationsSchema,
 	schemaOptions: { collection: 'locations' }
 });
 
-export type ILocations = Omit<
+export type ILocations = Without<
 	LocationsSchema,
 	'getModelForClass' | 'setModelForClass' | 'buildSchema'
 >;

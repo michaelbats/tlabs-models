@@ -1,5 +1,6 @@
 import { prop, Typegoose } from 'typegoose';
 import { RelatedCollection } from './task.models';
+import { Without } from 'src';
 enum Type {
 	Email = 'email',
 	Note = 'note',
@@ -27,7 +28,7 @@ class ActivitySchema extends Typegoose {
 	createdAt?: string;
 }
 
-export type IActivity = Omit<
+export type IActivity = Without<
 	ActivitySchema,
 	'getModelForClass' | 'setModelForClass' | 'buildSchema'
 >;

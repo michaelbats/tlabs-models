@@ -1,4 +1,5 @@
 import { prop, Typegoose, Ref, arrayProp } from 'typegoose';
+import { Without } from 'src';
 
 export class NextTask {
 	@prop({ required: true })
@@ -84,7 +85,7 @@ export class TaskSchema extends Typegoose {
 	createdAt?: string;
 }
 
-export type ITask = Omit<TaskSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
+export type ITask = Without<TaskSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
 export const Task = new TaskSchema().getModelForClass(TaskSchema, {
 	schemaOptions: {
 		collection: 'tasks'

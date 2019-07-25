@@ -7,7 +7,8 @@ import {
 	RequirementsExample,
 	SamplesExample,
 	GoogleFileExample,
-	WorkflowExample
+	WorkflowExample,
+	Without
 } from './shared.models';
 import { prop, Ref, arrayProp, Typegoose } from 'typegoose';
 
@@ -226,7 +227,7 @@ export const Job = new JobSchema().getModelForClass(JobSchema, {
 	schemaOptions: { collection: 'jobs' }
 });
 
-export type IJob = Omit<JobSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
+export type IJob = Without<JobSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
 
 export const JobDocExample: IJob = {
 	_id: 'string',
