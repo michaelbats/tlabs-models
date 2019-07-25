@@ -68,7 +68,7 @@ export class WorkType {
 	@prop({ required: true })
 	quantity: number;
 	@arrayProp({ itemsRef: Requirements, _id: false })
-	requirements?: Ref<Requirements>[];
+	requirements?: Requirements[];
 	@arrayProp({ items: String, _id: false })
 	elements?: string[];
 }
@@ -186,7 +186,7 @@ export class JobSchema extends Typegoose {
 	@prop({ ref: SiteSchema, _id: false })
 	site: ISite;
 	@prop({ ref: JobContact, _id: false })
-	contact: Ref<JobContact>;
+	contact: JobContact;
 	@prop()
 	notes?: string;
 	@prop()
@@ -198,7 +198,7 @@ export class JobSchema extends Typegoose {
 	@prop({ required: true })
 	sendReport: boolean;
 	@prop({ required: true })
-	work: Ref<Work>;
+	work: Work;
 	@arrayProp({ itemsRef: Requirements, _id: false })
 	requirements?: Requirements[];
 	@prop({ ref: Failure, _id: false })
