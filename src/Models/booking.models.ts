@@ -1,4 +1,5 @@
 import { prop, Typegoose, arrayProp } from 'typegoose';
+import { Without } from './shared.models';
 
 export class BookingSchema extends Typegoose {
 	@prop({ required: true })
@@ -38,19 +39,19 @@ export class BookingSchema extends Typegoose {
 	@prop()
 	isAVO?: boolean;
 	@prop()
-	startDate?: Date;
+	startDate?: string;
 	@prop()
-	endDate?: Date;
+	endDate?: string;
 	@prop()
 	isNotModifiable?: boolean;
 	@prop()
 	isLockedToEngineer?: boolean;
 	@prop()
-	actualStart?: Date;
+	actualStart?: string;
 	@prop()
-	actualEnd?: Date;
+	actualEnd?: string;
 	@prop()
-	statusDate?: Date;
+	statusDate?: string;
 	@prop()
 	ended?: boolean;
 	@prop()
@@ -58,7 +59,7 @@ export class BookingSchema extends Typegoose {
 	@prop({ required: true })
 	createdBy?: string;
 	@prop({ default: new Date(Date.now()) })
-	createdAt?: Date;
+	createdAt?: string;
 	@arrayProp({ items: String })
 	elementCompleted?: string[];
 }
@@ -69,4 +70,7 @@ export const Booking = new BookingSchema().getModelForClass(BookingSchema, {
 	}
 });
 
-export type IBooking = BookingSchema;
+export type IBooking = Without<
+	BookingSchema,
+	'getModelForClass' | 'setModelForClass' | 'buildSchema'
+>;

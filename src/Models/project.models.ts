@@ -7,13 +7,14 @@ import {
 	Workflow,
 	ProjectContacts,
 	ProjectCompliance,
-	Team
+	Team,
+	Without
 } from './shared.models';
-import { SiteSchema } from './site.models';
+import { SiteSchema, ISite } from './site.models';
 
 export class ProjectSchema extends Typegoose {
 	@prop({ required: true })
-	_id: string;
+	_id?: string;
 	@prop({ required: true })
 	clientId: string;
 	@prop({ required: true })
@@ -45,42 +46,45 @@ export class ProjectSchema extends Typegoose {
 	@prop({ default: false })
 	isCompleted: boolean;
 	@prop()
-	activationDate?: Date;
+	activationDate?: string;
 	@prop()
-	endDate?: Date;
+	endDate?: string;
 	@prop({ default: new Date(Date.now()) })
-	createdAt: Date;
+	createdAt: string;
 	@prop({ ref: GoogleFile, _id: false })
-	latestJobsOutputReport: Ref<GoogleFile>;
+	latestJobsOutputReport: GoogleFile;
 	@arrayProp({ items: String })
 	tags?: string[];
 	@prop()
 	sendReports?: boolean;
 	@arrayProp({ itemsRef: GoogleFile, _id: false })
-	files?: Ref<GoogleFile>[];
+	files?: GoogleFile[];
 	@prop({ ref: GoogleFolder, _id: false })
-	googleFolder?: Ref<GoogleFolder>;
+	googleFolder?: GoogleFolder;
 	@arrayProp({ itemsRef: Requirements, _id: false })
-	requirements?: Ref<Requirements>[];
+	requirements?: Requirements[];
 	@arrayProp({ items: String })
 	riskAssessments?: string[];
 	@prop({ ref: Workflow, _id: false })
-	workflow?: Ref<Workflow>;
+	workflow?: Workflow;
 	@arrayProp({ itemsRef: SiteSchema, _id: false })
-	sites: Ref<SiteSchema>[];
+	sites: ISite[];
 	@arrayProp({ items: String })
 	allowedWorkTypes?: string[];
 	@arrayProp({ items: String })
 	documents?: string[];
 	@arrayProp({ itemsRef: ProjectContacts, _id: false })
-	contacts?: Ref<ProjectContacts>[];
+	contacts?: ProjectContacts[];
 	@prop({ ref: ProjectCompliance, _id: false })
-	compliance?: Ref<ProjectCompliance>;
+	compliance?: ProjectCompliance;
 	@prop({ ref: Team })
-	team?: Ref<Team>;
+	team?: Team;
 }
 
 export const Project = new ProjectSchema().getModelForClass(ProjectSchema, {
 	schemaOptions: { collection: 'projects' }
 });
-export type IProject = ProjectSchema;
+export type IProject = Without<
+	ProjectSchema,
+	'getModelForClass' | 'setModelForClass' | 'buildSchema'
+>;

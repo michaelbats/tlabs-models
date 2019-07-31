@@ -37,6 +37,9 @@ import {
 	RelatedCollection,
 	ActivityType
 } from './enums';
+import { IBooking } from './models/booking.models';
+import { IBatch } from './models/batch.model';
+import { IProject } from './models/project.models';
 
 export const SiteDocExample: ISite = {
 	_id: 'string',
@@ -333,4 +336,87 @@ export const ActivityDocExample: IActivity = {
 	createdAt: new Date(Date.now()).toISOString(),
 	relatedId: 'string',
 	relatedCollection: RelatedCollection.Clients
+};
+
+export const BookingDocExample: IBooking = {
+	_id: 'string',
+	jobId: 'string',
+	jobName: 'string',
+	batchId: 'string',
+	batchName: 'string',
+	projectId: 'string',
+	projectName: 'string',
+	clientId: 'string',
+	clientName: 'string',
+	teamsId: 'string',
+	engineerId: 'string',
+	notes: 'string',
+	status: 'string',
+	imageId: 'string',
+	confirmationCode: 'string',
+	confirmationCodeReason: 'string',
+	feedback: 'string',
+	isAVO: false,
+	startDate: new Date(Date.now()).toISOString(),
+	endDate: new Date(Date.now()).toISOString(),
+	isNotModifiable: false,
+	isLockedToEngineer: false,
+	actualStart: new Date(Date.now()).toISOString(),
+	actualEnd: new Date(Date.now()).toISOString(),
+	statusDate: new Date(Date.now()).toISOString(),
+	ended: false,
+	workCompleted: false,
+	createdBy: 'string',
+	createdAt: new Date(Date.now()).toISOString(),
+	elementCompleted: ['string1', 'string2', 'string3']
+};
+
+export const BatchDocExample: IBatch = {
+	_id: 'string',
+	reference: 12345,
+	projectId: 'string',
+	projectName: 'string',
+	clientId: 'string',
+	clientName: 'string',
+	isCompleted: false,
+	activationDate: new Date(Date.now()).toISOString(),
+	completionDate: new Date(Date.now()).toISOString(),
+	note: 'string',
+	createdAt: new Date(Date.now()).toISOString()
+};
+
+export const ProjectDocExample: IProject = {
+	_id: 'string',
+	clientId: 'string',
+	clientName: 'string',
+	createdBy: 'string',
+	teamsId: 'string',
+	scopeOfWorks: 'string',
+	engineerNote: 'string',
+	sourceQuoteId: 'string',
+	quoteRequestedBy: 'string',
+	quotePreparedBy: 'string',
+	removalContractorContactId: 'string',
+	purchaseOrder: 'string',
+	callScript: 'string',
+	reference: 12345,
+	isActive: false,
+	isCompleted: false,
+	activationDate: new Date(Date.now()).toISOString(),
+	endDate: new Date(Date.now()).toISOString(),
+	createdAt: new Date(Date.now()).toISOString(),
+	latestJobsOutputReport: GoogleFileExample,
+	tags: ['string1', 'string2', 'string3'],
+	sendReports: false,
+	files: [GoogleFileExample, GoogleFileExample],
+	googleFolder: GoogleFolderExample,
+	requirements: [RequirementsExample, RequirementsExample],
+	riskAssessments: ['string1', 'string2', 'string3'],
+	workflow: WorkflowExample,
+	sites: [SiteDocExample, SiteDocExample],
+	allowedWorkTypes: ['string1', 'string2', 'string3'],
+	documents: ['string1', 'string2', 'string3'],
+	contacts: [ProjectContactsExample, ProjectContactsExample],
+	compliance: ProjectComplianceExample,
+	team: TeamExample
 };
