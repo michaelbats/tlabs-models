@@ -1,15 +1,15 @@
 {
-	"compilerOptions": {
-		"baseUrl": "./",
-		"target": "es5",
-		"module": "esnext",
-		"lib": ["es2017"],
-		"strict": true,
-		"esModuleInterop": true,
-		"moduleResolution": "node",
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"strictPropertyInitialization": false
-	},
-	"exclude": ["node_modules", "dist"]
+    "compilerOptions": {
+        "baseUrl": "./",
+        "target": "es6",
+        "module": "esnext",
+        "lib": ["es2017"],
+        "strict": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "strictPropertyInitialization": false
+    },
+    "exclude": ["node_modules", "dist"]
 }
