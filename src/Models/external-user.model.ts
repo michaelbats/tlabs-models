@@ -1,4 +1,4 @@
-import { prop, Typegoose, Ref } from 'typegoose';
+import { prop, Typegoose, Ref, arrayProp } from 'typegoose';
 
 class Permissions {
 	@prop({ default: false })
@@ -13,6 +13,24 @@ class Permissions {
 	@prop({ default: false })
 	admin: boolean;
 }
+
+class Session {
+	@prop({ required: true })
+	token: string;
+
+	@prop({ required: true })
+	details: string;
+
+	@prop({ required: true })
+	address: string;
+
+	@prop({ default: new Date(Date.now()) })
+	createdAt?: string;
+
+	@prop({ default: new Date(Date.now()) })
+	lastAccess: string;
+}
+
 export class ExternalUserSchema extends Typegoose {
 	@prop({ required: true })
 	_id: string;
@@ -51,7 +69,10 @@ export class ExternalUserSchema extends Typegoose {
 		ref: Permissions,
 		_id: false
 	})
-	permissions: Ref<Permissions>;
+	permissions: Permissions;
+
+	@arrayProp({ itemsRef: Session, _id: false })
+	sessions: Session[];
 }
 
 export const ExternalUser = new ExternalUserSchema().getModelForClass(ExternalUserSchema, {
@@ -80,4 +101,5 @@ export interface IJWTUser {
 	clientName: string;
 	googleId?: string;
 	microsoftId?: string;
+	sessions: Session[];
 }
