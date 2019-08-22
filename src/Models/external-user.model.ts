@@ -15,15 +15,24 @@ class Permissions {
     admin: boolean;
 }
 
+class AuthMethods {
+    @prop({ default: false })
+    microsoft: boolean;
+    @prop({ default: false })
+    google: boolean;
+    @prop({ default: false })
+    local: boolean;
+}
+
 export class ExternalUserSchema extends Typegoose {
     @prop({ required: true })
     _id: string;
 
-    @prop({ default: false })
-    signedIn: boolean;
-
     @prop({ default: null })
-    signInMethod: 'microsoft' | 'google' | 'local' | null;
+    lastAuth: string;
+
+    @prop({ ref: AuthMethods, _id: false })
+    authMethods: AuthMethods;
 
     @prop({ required: true })
     clientId: string;
