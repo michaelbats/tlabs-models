@@ -1,6 +1,6 @@
 import { prop, Typegoose } from 'typegoose';
 import { Without } from './shared.models';
-import { IExternalUser } from 'src/models/external-user.model';
+import { IExternalUser } from './external-user.model';
 export class SessionSchema extends Typegoose {
     @prop({ required: true })
     _id?: string;
