@@ -14,3 +14,4 @@ export * from './models/batch.model';
 export * from './models/task.models';
 export * from './models/activity.model';
 export * from './examples';
+export * from './models/session.model';
