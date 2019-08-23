@@ -15,10 +15,10 @@ export class SessionSchema extends Typegoose {
     user: IExternalUser;
 
     @prop({ default: new Date(Date.now()) })
-    createdAt?: string;
+    createdAt?: Date;
 
     @prop({ default: new Date(Date.now()) })
-    lastAccess: string;
+    lastAccess: Date;
 }
 
 export const Session = new SessionSchema().getModelForClass(SessionSchema, {
