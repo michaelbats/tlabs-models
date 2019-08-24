@@ -17,7 +17,7 @@ export class SessionSchema extends Typegoose {
     @prop({ default: new Date(Date.now()) })
     createdAt?: Date;
 
-    @prop({ default: new Date(Date.now()) })
+    @prop({ default: new Date(Date.now()), expires: 86400000 })
     lastAccess: Date;
 }
 
