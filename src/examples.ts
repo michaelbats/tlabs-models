@@ -40,6 +40,7 @@ import {
 import { IBooking } from './models/booking.models';
 import { IBatch } from './models/batch.model';
 import { IProject } from './models/project.models';
+import { ILocation, IProperties, IGeometry, IGeoJson } from './models/location.models';
 
 export const SiteDocExample: ISite = {
 	_id: 'string',
@@ -419,4 +420,32 @@ export const ProjectDocExample: IProject = {
 	contacts: [ProjectContactsExample, ProjectContactsExample],
 	compliance: ProjectComplianceExample,
 	team: TeamExample
+};
+
+export const GeometryExample: IGeometry = {
+	type: 'string',
+	coordinates: [12345, 12345]
+};
+
+export const PropertiesExample: IProperties = {
+	UPRN: 'string',
+	clientId: 'string',
+	clientName: 'string',
+	addressLine1: 'string',
+	postcode: 'string'
+};
+export const GeoJsonExample: IGeoJson = {
+	type: 'string',
+	geometry: GeometryExample,
+	properties: PropertiesExample,
+	$key: 'string'
+};
+
+export const LocationsDocExample: ILocation = {
+	_id: 'string',
+	type: 'string',
+	geometry: GeometryExample,
+	properties: PropertiesExample,
+	modifiedAt: new Date(Date.now()).toISOString(),
+	modifiedBy: 'string'
 };

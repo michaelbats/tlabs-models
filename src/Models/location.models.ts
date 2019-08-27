@@ -8,11 +8,6 @@ export class Geometry {
 	coordinates: [number, number];
 }
 
-export const GeometryExample: Geometry = {
-	type: 'string',
-	coordinates: [12345, 12345]
-};
-
 export class Properties {
 	@prop()
 	UPRN?: string;
@@ -25,14 +20,6 @@ export class Properties {
 	@prop()
 	postcode?: string;
 }
-
-export const PropertiesExample: Properties = {
-	UPRN: 'string',
-	clientId: 'string',
-	clientName: 'string',
-	addressLine1: 'string',
-	postcode: 'string'
-};
 
 export class LocationsSchema extends Typegoose {
 	@prop({ required: true })
@@ -51,11 +38,11 @@ export class LocationsSchema extends Typegoose {
 
 // ALL EXPORTS:
 // MAIN EXPORT
-export const Locations = new LocationsSchema().getModelForClass(LocationsSchema, {
+export const Location = new LocationsSchema().getModelForClass(LocationsSchema, {
 	schemaOptions: { collection: 'locations' }
 });
 
-export type ILocations = Without<
+export type ILocation = Without<
 	LocationsSchema,
 	'getModelForClass' | 'setModelForClass' | 'buildSchema'
 >;
@@ -67,18 +54,5 @@ export interface IGeoJson {
 	$key?: string;
 }
 
-export const GeoJsonExample: IGeoJson = {
-	type: 'string',
-	geometry: GeometryExample,
-	properties: PropertiesExample,
-	$key: 'string'
-};
-
-export const LocationsDocExample: ILocations = {
-	_id: 'string',
-	type: 'string',
-	geometry: GeometryExample,
-	properties: PropertiesExample,
-	modifiedAt: new Date(Date.now()).toISOString(),
-	modifiedBy: 'string'
-};
+export type IProperties = Properties;
+export type IGeometry = Geometry;
