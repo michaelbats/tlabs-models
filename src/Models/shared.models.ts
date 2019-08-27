@@ -61,7 +61,7 @@ export class Steps {
 export class WorkflowSteps {
 	@prop()
 	numberOfDays?: number;
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: Steps, _id: false })
 	steps: Steps[];
 }
 
@@ -77,11 +77,11 @@ export class Requirements {
 }
 
 export class Workflow {
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: WorkflowSteps, _id: false })
 	presite?: WorkflowSteps[];
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: WorkflowSteps, _id: false })
 	site?: WorkflowSteps[];
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: WorkflowSteps, _id: false })
 	postsite?: WorkflowSteps[];
 }
 
