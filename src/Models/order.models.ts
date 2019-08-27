@@ -1,112 +1,67 @@
-// import { createSchema, Type, typedModel, ExtractProps } from 'ts-mongoose';
-// import { SiteSchema } from './site.models';
+import { SiteSchema } from './site.models';
+import { prop, Ref, arrayProp, Typegoose } from 'typegoose';
+import { Without } from './shared.models';
 
-// const SurveySchema = createSchema({
-//   scheduleId: Type.string(),
-//   property: Type.optionalObject().of({
-//     type: Type.string(),
-//     totalFloors: Type.number(),
-//     allProperty: Type.object().of({
-//       flooring: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       windows: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       heating: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       roof: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       ceiling: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       externalWalls: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       intercom: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       rewire: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       })
-//     }),
-//     utilities: Type.object().of({
-//       boiler: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       })
-//     }),
-//     kitchen: Type.object().of({
-//       furniture: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       flooring: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       detectors: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       windows: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       ceiling: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       })
-//     }),
-//     bathroom: Type.object().of({
-//       toilet: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       }),
-//       tiles: Type.object().of({
-//         survey: Type.boolean(),
-//         details: Type.optionalString()
-//       })
-//     })
-//   })
-// });
+export class SurveySchema {
+	@prop({ required: true })
+	scheduleId: string;
 
-// const ResidentSchema = createSchema({
-//   isVoid: Type.string(),
-//   name: Type.optionalString(),
-//   email: Type.optionalString(),
-//   phone: Type.optionalString(),
-//   details: Type.optionalString()
-// });
+	@prop()
+	details?: string;
+}
 
-// const OrderSchema = createSchema({
-//   _id: Type.string(),
-//   status: Type.string({ default: 'draft' }),
-//   clientId: Type.string(),
-//   createdAt: Type.optionalDate({
-//     required: true,
-//     default: new Date(Date.now())
-//   }),
-//   updatedAt: Type.optionalDate({ required: true }),
-//   createdBy: Type.optionalString({ required: true }),
-//   updatedBy: Type.optionalString({ required: true }),
-//   site: Type.schema().of(SiteSchema),
-//   survey: Type.optionalSchema().of(SurveySchema),
-//   resident: Type.optionalSchema().of(ResidentSchema)
-// });
+export class ResidentSchema {
+	@prop({ required: true })
+	isVoid: boolean;
+	@prop()
+	name?: string;
+	@prop()
+	email?: string;
+	@prop()
+	phone?: string;
+	@prop()
+	details?: string;
+}
 
-// // mongoose usable schema
-// export const Order = typedModel('orders', OrderSchema);
-// // usable type extracted
-// export type IOrder = ExtractProps<typeof OrderSchema>;
-// export type IOrderResident = ExtractProps<typeof ResidentSchema>;
+export class OrderSchema extends Typegoose {
+	@prop({ required: true })
+	_id?: string;
+
+	@prop({ default: 'draft' })
+	status?: string;
+
+	@prop({ required: true })
+	clientId: string;
+
+	@prop({ required: true })
+	projectId: string;
+
+	@prop({ default: new Date(Date.now()) })
+	createdAt: Date;
+
+	@prop({ default: new Date(Date.now()) })
+	updatedAt: Date;
+
+	@prop({ required: true })
+	createdBy?: string;
+
+	@prop({ required: true })
+	updatedBy?: string;
+
+	@prop({ _id: false })
+	site?: SiteSchema;
+
+	@prop({ _id: false })
+	survey?: SurveySchema;
+
+	@prop({ _id: false })
+	resident?: ResidentSchema;
+}
+
+export const Order = new OrderSchema().getModelForClass(OrderSchema, {
+	schemaOptions: { collection: 'orders' }
+});
+
+export type IOrder = Without<OrderSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
+export type IResidentSchema = ResidentSchema;
+export type ISurveySchema = SurveySchema;
