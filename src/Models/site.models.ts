@@ -1,4 +1,4 @@
-import { prop, Typegoose, ModelType, InstanceType } from 'typegoose';
+import { prop, Typegoose } from 'typegoose';
 import { Without } from './shared.models';
 
 export class SiteSchema extends Typegoose {

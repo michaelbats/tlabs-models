@@ -42,37 +42,37 @@ export class CaveatsSchema {
 	description: string;
 }
 export class ListSchema {
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: IdNameSchema, _id: false })
 	engineerSkills: IdNameSchema[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: RequirementsSchema, _id: false })
 	requirements: RequirementsSchema;
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: IdNameSchema, _id: false })
 	sectors: IdNameSchema[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: IdNameSchema, _id: false })
 	sources: IdNameSchema[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: IdNameSchema, _id: false })
 	safetyEquipments: IdNameSchema[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: SiteItemsSchema, _id: false })
 	siteItems: SiteItemsSchema[];
 
-	@arrayProp({ _id: false })
-	riskAssessments: SiteItemsSchema[];
+	@arrayProp({ itemsRef: RiskAssessmentsSchema, _id: false })
+	riskAssessments: RiskAssessmentsSchema[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: CaveatsSchema, _id: false })
 	caveats: CaveatsSchema[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: Element, _id: false })
 	elements: Element[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: IdNameSchema, _id: false })
 	cancellationReasons: IdNameSchema[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: IdNameSchema, _id: false })
 	onHoldReasons: IdNameSchema[];
 }
 
@@ -104,13 +104,13 @@ export class SystemSchema extends Typegoose {
 	@prop({ required: true })
 	_id?: string;
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: ListSchema, _id: false })
 	lists: ListSchema[];
 
-	@prop({ _id: false })
+	@prop({ ref: RagSchema, _id: false })
 	rag: RagSchema;
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: ScheduleOfRates, _id: false })
 	scheduleOfRates: ScheduleOfRates[];
 
 	@prop()
@@ -125,7 +125,7 @@ export class SystemSchema extends Typegoose {
 	@prop()
 	reportEmailText: string;
 
-	@prop({ _id: false })
+	@prop({ ref: GoogleFile, _id: false })
 	latestJobsOutputReport: GoogleFile;
 
 	@prop()
@@ -140,10 +140,10 @@ export class SystemSchema extends Typegoose {
 	@prop()
 	dayStart: string;
 
-	@prop({ _id: false })
+	@prop({ ref: WeeklyTaskReportSchema, _id: false })
 	weeklyTaskReport: WeeklyTaskReportSchema[];
 
-	@arrayProp({ _id: false })
+	@arrayProp({ itemsRef: EngineerLocationSchema, _id: false })
 	engineerLocations: EngineerLocationSchema[];
 
 	@prop({ _id: false })

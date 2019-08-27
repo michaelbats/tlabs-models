@@ -1,11 +1,10 @@
 import { SiteSchema } from './site.models';
-import { prop, Ref, arrayProp, Typegoose } from 'typegoose';
+import { prop, Typegoose } from 'typegoose';
 import { Without } from './shared.models';
 
 export class SurveySchema {
 	@prop({ required: true })
 	scheduleId: string;
-
 	@prop()
 	details?: string;
 }
@@ -48,13 +47,13 @@ export class OrderSchema extends Typegoose {
 	@prop({ required: true })
 	updatedBy?: string;
 
-	@prop({ _id: false })
+	@prop({ ref: SiteSchema, _id: false })
 	site?: SiteSchema;
 
-	@prop({ _id: false })
+	@prop({ ref: SurveySchema, _id: false })
 	survey?: SurveySchema;
 
-	@prop({ _id: false })
+	@prop({ ref: ResidentSchema, _id: false })
 	resident?: ResidentSchema;
 }
 
