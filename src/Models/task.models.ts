@@ -29,7 +29,7 @@ export class TaskSchema extends Typegoose {
 	@prop({ default: false })
 	complete: boolean;
 	@prop()
-	completedAt?: string;
+	completedAt?: Date;
 	@arrayProp({ items: String })
 	assigneeIds?: string[];
 	@prop()
@@ -37,11 +37,11 @@ export class TaskSchema extends Typegoose {
 	@prop()
 	details?: string;
 	@prop({ required: true })
-	dueDate: string;
+	dueDate: Date;
 	@prop()
-	lowerLimit?: string;
+	lowerLimit?: Date;
 	@prop()
-	higherLimit?: string;
+	higherLimit?: Date;
 	@prop({ required: true })
 	raisedBy?: string;
 	@prop({ enum: Object.values(RelatedCollection) })
@@ -61,7 +61,7 @@ export class TaskSchema extends Typegoose {
 	@arrayProp({ items: String })
 	tags?: string[];
 	@prop({ default: new Date(Date.now()) })
-	createdAt?: string;
+	createdAt?: Date;
 }
 
 export type ITask = Without<TaskSchema, 'getModelForClass' | 'setModelForClass' | 'buildSchema'>;
