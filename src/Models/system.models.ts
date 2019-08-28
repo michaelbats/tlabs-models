@@ -104,8 +104,8 @@ export class SystemSchema extends Typegoose {
     @prop({ required: true })
     _id?: string;
 
-    @arrayProp({ items: Object, _id: false })
-    lists: ListSchema[];
+    @prop()
+    lists: ListSchema;
 
     @prop()
     rag: RagSchema;
