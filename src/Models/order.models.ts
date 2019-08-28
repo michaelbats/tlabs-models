@@ -1,7 +1,7 @@
 import { SiteSchema } from './site.models';
 import { prop, Typegoose } from 'typegoose';
 import { Without } from './shared.models';
-import { SurveyType } from 'src/enums';
+import { SurveyType } from '../enums';
 
 export class SurveySchema {
     @prop()
