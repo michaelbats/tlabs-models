@@ -74,8 +74,7 @@ export enum Offices {
 }
 
 export enum SurveyType {
-    Management = 'Management',
-    Refurbishment = 'Refurbishment',
-    PartRefurbishment = 'Part-Refurbishment',
-    Demolition = 'Demolition'
+    Management = 'management',
+    Refurbishment = 'refurbishment',
+    Demolition = 'demolition'
 }
