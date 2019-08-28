@@ -4,7 +4,7 @@ import { Without } from './shared.models';
 export class Geometry {
 	@prop({ required: true })
 	type: string;
-	@arrayProp({ items: Number, required: true })
+	@arrayProp({ items: Number, required: true, _id: false })
 	coordinates: [number, number];
 }
 

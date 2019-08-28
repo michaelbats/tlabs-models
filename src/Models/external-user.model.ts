@@ -1,5 +1,6 @@
 import { prop, Typegoose, arrayProp } from 'typegoose';
 import { Without } from './shared.models';
+import { IdNameSchema } from './system.models';
 
 class Permissions {
 	@prop({ default: false })
@@ -58,8 +59,8 @@ export class ExternalUserSchema extends Typegoose {
 	@prop({ default: Date.now() })
 	createdAt: Date;
 
-	@arrayProp({ items: String })
-	projects: string[];
+	@arrayProp({ itemsRef: IdNameSchema, _id: false })
+	projects: IdNameSchema[];
 
 	@prop()
 	permissions: Permissions;
