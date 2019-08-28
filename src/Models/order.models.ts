@@ -5,6 +5,8 @@ import { Without } from './shared.models';
 export class SurveySchema {
 	@prop({ required: true })
 	scheduleId: string;
+	@prop({ required: true })
+	projectId: string;
 	@prop()
 	details?: string;
 }
