@@ -15,6 +15,10 @@ import { SiteSchema, ISite } from './site.models';
 export class ProjectSchema extends Typegoose {
 	@prop({ required: true })
 	_id?: string;
+
+	@prop({ required: true })
+	title: string;
+
 	@prop({ required: true })
 	clientId: string;
 	@prop({ required: true })
