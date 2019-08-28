@@ -388,6 +388,7 @@ export const BatchDocExample: IBatch = {
 
 export const ProjectDocExample: IProject = {
 	_id: 'string',
+	title: 'string',
 	clientId: 'string',
 	clientName: 'string',
 	createdBy: 'string',
