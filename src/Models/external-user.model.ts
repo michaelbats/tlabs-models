@@ -83,6 +83,6 @@ export interface IPublicUser {
 	clientId: string;
 	clientName: string;
 	email: string;
-	projects: string[];
+	projects: IdNameSchema[];
 	permissions: Permissions;
 }
