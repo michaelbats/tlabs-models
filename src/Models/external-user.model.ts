@@ -59,7 +59,7 @@ export class ExternalUserSchema extends Typegoose {
 	@prop({ default: Date.now() })
 	createdAt: Date;
 
-	@arrayProp({ itemsRef: IdNameSchema, _id: false })
+	@arrayProp({ items: Object, _id: false })
 	projects: IdNameSchema[];
 
 	@prop()
