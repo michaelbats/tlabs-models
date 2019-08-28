@@ -72,3 +72,10 @@ export enum Offices {
     Les = 'Leicester',
     Lon = 'London'
 }
+
+export enum SurveyType {
+    Management = 'Management',
+    Refurbishment = 'Refurbishment',
+    PartRefurbishment = 'Part-Refurbishment',
+    Demolition = 'Demolition'
+}
