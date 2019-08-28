@@ -26,9 +26,9 @@ export class LocationsSchema extends Typegoose {
 	_id: string;
 	@prop({ required: true })
 	type: string;
-	@prop({ ref: Geometry, _id: false })
+	@prop({ _id: false })
 	geometry: Geometry;
-	@prop({ ref: Properties, _id: false })
+	@prop({ _id: false })
 	properties: Properties;
 	@prop({ default: new Date(Date.now()) })
 	modifiedAt: string;
