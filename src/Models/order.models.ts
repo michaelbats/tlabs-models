@@ -55,13 +55,13 @@ export class OrderSchema extends Typegoose {
     @prop({ required: true })
     createdByFriendly?: string;
 
-    @prop({ ref: SiteSchema, _id: false })
+    @prop()
     site?: SiteSchema;
 
-    @prop({ ref: SurveySchema, _id: false })
+    @prop()
     survey?: SurveySchema;
 
-    @prop({ ref: ResidentSchema, _id: false })
+    @prop()
     resident?: ResidentSchema;
 }
 
