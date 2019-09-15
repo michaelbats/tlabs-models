@@ -37,8 +37,8 @@ export class OrderSchema extends Typegoose {
     @prop({ required: true })
     clientId: string;
 
-    @prop({ required: true })
-    projectId: string;
+    @prop()
+    projectId?: string;
 
     @prop({ default: new Date(Date.now()) })
     createdAt: Date;
@@ -51,6 +51,9 @@ export class OrderSchema extends Typegoose {
 
     @prop({ required: true })
     updatedBy?: string;
+
+    @prop({ required: true })
+    createdByFriendly?: string;
 
     @prop({ ref: SiteSchema, _id: false })
     site?: SiteSchema;
@@ -70,5 +73,6 @@ export type IOrder = Without<
     OrderSchema,
     'getModelForClass' | 'setModelForClass' | 'buildSchema'
 >;
+
 export type IResidentSchema = ResidentSchema;
 export type ISurveySchema = SurveySchema;
