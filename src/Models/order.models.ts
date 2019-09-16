@@ -2,14 +2,15 @@ import { SiteSchema } from './site.models';
 import { prop, Typegoose } from 'typegoose';
 import { Without } from './shared.models';
 import { SurveyType } from '../enums';
+import { IdTitleSchema } from './system.models';
 
 export class SurveySchema {
 	@prop()
-	scheduleId?: string;
+	schedule?: IdTitleSchema;
 	@prop()
-	projectId?: string;
+	project?: IdTitleSchema;
 	@prop({ enum: Object.values(SurveyType) })
-	type: SurveyType;
+	type?: SurveyType;
 	@prop()
 	details?: string;
 }
