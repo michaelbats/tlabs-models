@@ -2,7 +2,7 @@ import { prop, Typegoose } from 'typegoose';
 import { Without } from './shared.models';
 
 export class SiteSchema extends Typegoose {
-	@prop({ required: true })
+	@prop()
 	_id?: string;
 
 	@prop({ required: true })
