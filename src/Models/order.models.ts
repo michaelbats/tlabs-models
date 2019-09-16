@@ -1,6 +1,6 @@
 import { SiteSchema } from './site.models';
 import { prop, Typegoose } from 'typegoose';
-import { Without } from './shared.models';
+import { Without, Element } from './shared.models';
 import { SurveyType } from '../enums';
 import { IdTitleSchema } from './system.models';
 
@@ -13,6 +13,8 @@ export class SurveySchema {
 	type?: SurveyType;
 	@prop()
 	details?: string;
+	@prop()
+	elements?: Element[];
 }
 
 export class ResidentSchema {

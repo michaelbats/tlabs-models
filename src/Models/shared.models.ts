@@ -28,8 +28,8 @@ export class Element {
 	_id: string;
 	@prop({ required: true })
 	name: string;
-	@prop({ required: true })
-	description: string;
+	@prop()
+	description?: string;
 	@prop({ default: 0 })
 	duration: number;
 	@prop({ default: 0 })
