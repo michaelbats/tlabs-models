@@ -1,29 +1,29 @@
 {
-	"name": "@tlabs/models",
-	"scripts": {
-		"tsc": "tsc",
-		"build": "bash scripts/build.sh"
-	},
-	"version": "1.7.13",
-	"description": "Typescript Interfaces and models for TL apps",
-	"main": "dist/index.js",
-	"repository": "https://github.com/michaelbats/tlabs-models.git",
-	"author": "Sebastian Gug",
-	"private": false,
-	"module": "dist/es/index.js",
-	"jsnext:main": "es/index.js",
-	"license": "LICENSE.MD",
-	"dependencies": {},
-	"devDependencies": {
-		"@types/mongoose": "^5.5.6",
-		"mongoose": "^5.6.1",
-		"typegoose": "^5.7.2",
-		"typescript": "^3.4.3"
-	},
-	"peerDependencies": {
-		"@types/mongoose": "^5.5.6",
-		"mongoose": "^5.6.1",
-		"typegoose": "^5.7.2",
-		"typescript": "^3.4.3"
-	}
+    "name": "@tlabs/models",
+    "scripts": {
+        "tsc": "tsc",
+        "build": "bash scripts/build.sh"
+    },
+    "version": "1.7.14",
+    "description": "Typescript Interfaces and models for TL apps",
+    "main": "dist/index.js",
+    "repository": "https://github.com/michaelbats/tlabs-models.git",
+    "author": "Sebastian Gug",
+    "private": false,
+    "module": "dist/es/index.js",
+    "jsnext:main": "es/index.js",
+    "license": "LICENSE.MD",
+    "dependencies": {},
+    "devDependencies": {
+        "@types/mongoose": "^5.5.6",
+        "mongoose": "^5.6.1",
+        "typegoose": "^5.7.2",
+        "typescript": "^3.4.3"
+    },
+    "peerDependencies": {
+        "@types/mongoose": "^5.5.6",
+        "mongoose": "^5.6.1",
+        "typegoose": "^5.7.2",
+        "typescript": "^3.4.3"
+    }
 }
